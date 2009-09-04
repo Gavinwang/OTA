@@ -1,0 +1,51 @@
+<html>
+<div class="header">
+  <div class="people"></div>
+  <div class="logo"><img src="<%= @email_logo %>" border="0"/></div>
+</div>
+<br>
+
+<div class="">
+  <table width="100%">
+    <tr style="font-weight:bold">
+      <td>Email</td>
+      <td>First Name</td>
+      <td>Last Name</td>
+      <td>Dom/Int</td>
+      <td>Program</td>
+      <td>Start Date</td>
+
+    </tr>
+    <% if @user != nil %>
+        <% if !@user.empty? %>
+            <% @user.each do |pf| %>
+                <tr >
+                  <td><%= pf.login_email %></td>
+                  <td><%= pf.con_name %></td>
+                  <td><%= pf.con_last_name %></td>
+                  <td>
+                    <% if pf.user_type == 1 %>
+                        Int
+                    <% else %>
+                        Dom
+                    <% end %>
+
+                  </td>
+                  <% degree = Degree.find_by_profile_id(pf.id) %>
+                  <td><%= degree.degree if degree != nil %></td>
+                  <td><%= degree.start_date if degree != nil %></td>
+
+                </tr>
+            <% end %>
+
+        <% end %>
+    <% end %>
+  </table>
+</div>
+<br><br>
+Your Enrollment Team<br>
+Concordia University<br>
+1-877-251-4405<br>
+admissions@concordiaonline.net<br>
+
+</html>

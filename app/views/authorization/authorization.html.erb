@@ -1,0 +1,59 @@
+<div class="main_right">
+ <form name="authorizationForm" action="/authorization/save" method="post">
+  <span style="color:red;"><%= flash[:hint] %></span>
+
+  <div class="content_div">
+    <div class="contright_title">Authorization</div>
+    <div class="contright_cont">By signing this application, I hereby certify that all the
+      information I have provided is accurate. Furthermore, if I am accepted
+      and subsequently attend Concordia University, I agree to abide by all
+      policies and procedures stated in the Concordia University catalog and
+      student handbook and any subsequent updates or revisions to such
+      policies that are communicated to me during my tenure as a Concordia
+      University student.<br/>
+      <br/>
+      <br/>
+
+      <div class="userInfo">
+        <ul>
+          <li><span class=label>*Date(DD/MM/YYYY):</span>
+            <input maxlength="10" name="date" id="date" type="text" value="<%= @transcript.date if @transcript!=nil %>" <%= "readonly=true" if @transcript!=nil %>/>
+            <span id="hint" class="mark"></span>
+          </li>
+          <li><span class=label>*Signature(Type in Name): </span>
+            <input maxlength="50" type="text" name="signature" id="signature" value="<%= @transcript.signature if @transcript!=nil %>" <%= "readonly=true" if @transcript!=nil %>/>
+            <span id="hint_signature" class="mark"></span>
+          </li>
+        </ul>
+      </div>
+      <br/><br/>
+      <br/>
+      Concordia University admits students of any religion, race, color, national and ethnic origin, sex, age, sexual
+      orientation, and disability to all the rights, privileges, programs, and activities generally accorded or made
+      available to students at the University. It does not discriminate on the basis of religion, race, color, national
+      and ethnic origin, sex, age, sexual orientation, or disability in administration of its educational policies and
+      programs, admission policies, merit scholarships and loan programs, and athletic or other university-administered
+      programs. Complaints or charges should be pled with the University’s Title IX coordinator.
+      <br/>
+
+      <div align="center"><br/>
+        <a href="/profile/review"><img src="/images/hc/cancel.gif" border="0"></a>&nbsp;&nbsp;
+        <a id="view" href="javascript:showhideview(1)"><img src="/images/hc/submit.gif" border="0"></a>
+      </div>
+    </div>
+  </div>
+</form>
+</div>
+<div class="main_bottom"></div>
+<div id="searchCourse" style="position:absolute;z-index:99999;display:none;">
+  <div style="width:400px;border: 2px solid #152758;padding: 15px; font-size:16px; font-weight:bold;background-color: #FAFAEB; cursor:pointer;">
+    Once submitted, no changes may be made to your application. For any questions or changes, please call 1-877-251-4405
+    or admissions@concordiaonline.net.<br/>
+
+    <div align="center" style="padding-top:15px;">
+      <a href="javascript:showhideview()"><img src="/images/hc/cancel.gif" border="0"></a>&nbsp;&nbsp;
+      <a href="javascript:authorizationSubmit()"><img src="/images/hc/submit.gif" border="0"></a></div>
+
+  </div>
+</div>
+

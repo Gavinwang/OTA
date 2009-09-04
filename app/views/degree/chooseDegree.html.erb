@@ -1,0 +1,33 @@
+  <body>
+  <div class="main">
+    <form name="degreeForm" action="/degree/create" method="post">
+    <div class="content_div">
+      <div class="content_title">Apply to a Degree Program</div>
+      <div class="content_index_left" align="center">To complete your profile, please select one item from each step below and then click
+        on the create profile button below.
+      </div>
+    </div>
+    <div class="content_div">
+      <div class="content_title">Choose Your Program</div>
+      <div class="content_index_left" align="center">
+        <select name="degree[degree]">
+          <option value="M.Ed. Educational Leadership">M.Ed. Educational Leadership</option>
+        </select>
+      </div>
+    </div>
+    <div class="content_div">
+      <div class="content_title">Choose a Start Date</div>
+      <div class="content_index_left" align="center">
+        <select name="degree[start_date]">
+          <% Constant::DEGREE_DATE.each do |temp|%>
+		  	<%= "<option value=\""+temp+"\">"+temp+"</option>" %>
+		  <%end%>
+        </select>
+        <br>
+        <br>
+        <div align="right"><a href="#" onclick="submitDegree();"><img src="/images/hc/CREATE PROFILE.gif" border="0"/></a></div>
+      </div>
+    </div>
+    </form>
+  </div>
+  </body>

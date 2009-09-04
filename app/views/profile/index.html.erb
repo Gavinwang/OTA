@@ -1,0 +1,144 @@
+<body onload="isInt();">
+<div class="main">
+
+  <form name="profileForm" action="/profile/create" method="post">
+    <span id="vmessage"><ul style='color: Red;'><%= error_message_on(:profile, :login_email) %></ul><%= errors_for @profile, [:login_email, :password, :email_primary] %></span>
+    <%= @massage %>
+
+    <span id="message">
+      <ul id="passwordError" style="color: Red;"></ul>
+      <ul id="emailError" style="color: Red;"></ul>
+      <ul id="error" style="color: Red;"></ul>
+    </span>
+
+    <div class="content_div">
+      <div class="content_title">Create Your Login</div>
+      <div class="content_index_left">You are required to fill-in any information below that has an asterisk (*).<br/>
+
+        <div class="userInfo">
+          <ul>
+            <li><span class=label>* Email Address</span>
+              <input name="profile[login_email]" maxlength="100" id="loginEmail" size="35" type="text" value="<%= @profile.login_email if @profile!=nil %>">
+              <span id="spanle" style='display:none;color: Red;font-size: large;'><b>!</b></span>
+              <span id="spanle1"><%= has_error @profile, :login_email %></span>
+            </li>
+            <li><span class=label>* Email Address Confirmation</span>
+              <input name="loginEmailConfirmation" maxlength="100" id="loginEmailConfirmation" size="35" type="text" value="<%= @profile.login_email if @profile!=nil %>">
+              <span id="spanec" style='display:none;color: Red;font-size: large;'><b>!</b></span>
+            </li>
+            <li><span class=label>* Password</span>
+              <input name="profile[password]" id="password" maxlength="20" size="25" type="password"  value="">
+              <span id="spanp" style='display:none;color: Red;font-size: large;'><b>!</b></span>
+               Passwords must be at least six characters.
+              <span id="spanp1"><%= has_error @profile, :password %></span>
+            </li>
+            <li><span class=label>* Re-Enter Password</span>
+              <input name="verify_password" maxlength="20" id="verifyPassword" size="25" type="password"  value="">
+              <span id="spanvp" style='display:none;color: Red;font-size: large;'><b>!</b></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="content_div">
+      <div class="content_title">Residency Status</div>
+      <div class="content_index_left" style="text-align:center;">
+        *Are you an international student?&nbsp;&nbsp;
+        <input name="studenttype" id="int" type="radio" value="0" onclick="isInt();"
+               <% if @profile!=nil && @profile.user_type==0 %>checked="checked"
+               <% end %>>Yes &nbsp;
+        <input name="studenttype" id="dom" type="radio" value="1" onclick="isInt();"
+               <% if @profile!=nil && @profile.user_type==1 %>checked="checked"
+               <% end %>>No &nbsp;&nbsp;&nbsp;<span id="spanst" style='display:none;color: Red;font-size: large;'><b>!</b></span><br/>
+        <br>
+
+        <div class="userInfo">
+          Those
+          students who are not United States citizens or permanent residents are international students.
+        </div>
+      </div>
+      <div class="content_right"></div>
+    </div>
+
+    <div class="content_div" id ="admissionRequirements" style="display:none">
+      <div class="content_title">Admission Requirements</div>
+      <div class="content_index_left" id="isDom" style="display:none">
+        <ul>
+          <li type="square">Completed Concordia University graduate application form (must be completed online)<br><br>
+          </li>
+
+          <li type="square">Proof of degree from an accredited institution via official
+            transcripts (Bachelor's and/or Master's). Concordia University will request
+            transcripts on your behalf.<br><br></li>
+
+          <li type="square">Two letters of recommendation<br><br></li>
+
+          <li type="square">A minimum 2.8 GPA for undergraduate coursework (3.0 GPA for any graduate coursework)<br>
+          </li>
+        </ul>
+      </div>
+      <div class="content_index_left" id="isInt" style="display:none">
+        <ul>
+          <li type="square">Completed Concordia University graduate application form (must be completed online)
+          </li>
+          <br>
+          <li type="square">Proof of a bachelor's and/or master's degree that is officially recognized by the Ministry
+            of Education. Transcripts must be evaluated by WES (www.wes.org) at the expense of the student.
+          </li>
+          <br>
+          <li type="square">Two letters of recommendation</li>
+          <br>
+          <li type="square"> A minimum 2.8 GPA for undergraduate coursework (3.0 GPA for any graduate coursework)
+          </li>
+          <br>
+          <li type="square"> A successful score of 80 or better on the IBT (Internet Based Test of the TOEFL) - or - A
+            successful score of a 550 or better with TWE of 5 or better.
+          </li>
+          <br>
+          <li type="square">Letter of Financial Guarantee, or attached form signed by bank.</li>
+          <br>
+          <li type="square">Current Resume of Educational and Work experience.</li>
+          <br>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content_div">
+      <div class="content_title">Email Agreement</div>
+      <div class="content_index_left">
+        <div style="float:left; padding-right:15px;">
+        <input id="emailAgreement" name="emailAgreement" type="checkbox"/>&nbsp;&nbsp;&nbsp;<span id="spanea" style='display:none;color: Red;font-size: large;'><b>!</b></span>
+        </div>
+        <div style="padding-left:43px">I officially state that the email address I have provided above is my
+          legitimate email address, independently held by me and no one else, and can be used for official
+          communications between me and Concordia University during the application process. I acknowledge that it is
+          exclusively my responsibility to keep this email account active, open, and secure and to check it regularly to
+          ensure that I receive all communications from Concordia University during this process. I understand that it
+          is solely my responsibility to update Concordia University with any email address changes.
+          <br>
+          <br>
+
+        </div>
+        <div align="right">
+          <a href="#" onclick="submitProfile();"><img src="/images/hc/NEXT.gif" border="0"/></a>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<script type="text/javascript">
+    function isInt() {
+        if ($("int").checked) {
+            $("admissionRequirements").style.display = "";
+            $("isInt").style.display = ""
+            $("isDom").style.display = "none"
+        }
+        if ($("dom").checked) {
+            $("admissionRequirements").style.display = "";
+            $("isInt").style.display = "none"
+            $("isDom").style.display = ""
+        }
+    }
+</script>
+</body>

@@ -1,0 +1,300 @@
+<body>
+<div class="main">
+<div class="main_right_success"></div>
+<div class="content_index_left">
+<div style="padding-left:20px">
+<%= "<h2 align='center'>Concordia University Online Admission Application</h2>" %>
+<br/>
+
+<% if @profile != nil %>
+    <% if @profile.login_email != nil && @profile.login_email != "" %><%= "<h4>Email:&nbsp;&nbsp;&nbsp;&nbsp;"+@profile.login_email+"</h4>" %>
+    <% end %>
+<% end %>
+
+<% if @degree != nil %>
+    <% if @degree.degree != nil && @degree.degree != "" %><%= "<h4>Program:&nbsp;&nbsp;&nbsp;&nbsp;"+@degree.degree+"</h4>" %>
+    <% end %>
+    <% if @degree.start_date != nil && @degree.start_date != "" %><%= "<h4>Start Date:&nbsp;&nbsp;&nbsp;&nbsp;"+@degree.start_date+"</h4>" %>
+    <% end %>
+<% end %>
+
+<% if @profile != nil %>
+    <%= "<h3>Personal Information</h3>" %>
+    <ul>
+      <%= "<h4>Contact Information</h4>" %>
+      <% if @profile.con_name != nil && @profile.con_name != "" %><%= "<li><span>Name:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.con_name+"</li>" %>
+      <% end %>
+      <% if @profile.con_last_name != nil && @profile.con_last_name != "" %><%= "<li><span>Last Name:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.con_last_name+"</li>" %>
+      <% end %>
+      <% if @profile.con_legal_first_name != nil && @profile.con_legal_first_name != "" %><%= "<li><span>Legal First Name:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.con_legal_first_name+"</li>" %>
+      <% end %>
+      <% if @profile.con_middle_name != nil && @profile.con_middle_name != "" %><%= "<li><span>Middle Name:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.con_middle_name+"</li>" %>
+      <% end %>
+      <% if @profile.con_prefered_first_name != nil && @profile.con_prefered_first_name != "" %><%= "<li><span>Preferred First Name:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.con_prefered_first_name+"</li>" %>
+      <% end %>
+      <% if @profile.con_other_name != nil && @profile.con_other_name != "" %><%= "<li><span>Other name(s) on Academic Records:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.con_other_name+"</li>" %>
+      <% end %>
+
+      <% if @profile.mail_street != nil || @profile.mail_city != nil || @profile.mail_zip_code != nil %>
+          <%= "<h4>Mailing Address</h4>" %>
+          <% if @profile.mail_street != nil && @profile.mail_street != "" %><%= "<li><span>Street:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.mail_street+"</li>" %>
+          <% end %>
+          <% if @profile.mail_city != nil && @profile.mail_city != "" %><%= "<li><span>City:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.mail_city+"</li>" %>
+          <% end %>
+          <% if @profile.mail_state != nil && @profile.mail_state != "" %><%= "<li><span>State:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.mail_state+"</li>" %>
+          <% end %>
+          <% if @profile.mail_zip_code != nil && @profile.mail_zip_code != "" %><%= "<li><span>Zip Code:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.mail_zip_code+"</li>" %>
+          <% end %>
+      <% end %>
+
+      <% if @profile.permant_street != nil || @profile.permant_city != nil || @profile.permant_state != nil || @profile.permant_country != nil || @profile.permant_regional_code != nil %>
+          <%= "<h4>Permanent Address</h4>" %>
+          <% if @profile.permant_street != nil && @profile.permant_street != "" %><%= "<li><span>Street:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.permant_street+"</li>" %>
+          <% end %>
+          <% if @profile.permant_city != nil && @profile.permant_city != "" %><%= "<li><span>City/Province:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.permant_city.to_s+"</li>" %>
+          <% end %>
+          <% if @profile.permant_state != nil && @profile.permant_state != "" %><%= "<li><span>State/Region:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.permant_state.to_s+"</li>" %>
+          <% end %>
+          <% if @profile.permant_country != nil && @profile.permant_country != "" %><%= "<li><span>Country:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.permant_country.to_s+"</li>" %>
+          <% end %>
+          <% if @profile.permant_regional_code != nil && @profile.permant_regional_code != "" %><%= "<li><span>Regional Code:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.permant_regional_code.to_s+"</li>" %>
+          <% end %>
+      <% end %>
+
+      <% if @profile.home_phone != nil || @profile.mobile_phone != nil ||  @profile.work_phone != nil %>
+          <%= "<h4>Phones</h4>" %>
+          <% if @profile.home_phone != nil && @profile.home_phone != "" %>
+              <li><%= "<span>Home Phone:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.home_phone %><%= "<span> (Primary)</span>" if @profile.primary == 1 %></li>
+          <% end %>
+          <% if @profile.mobile_phone != nil && @profile.mobile_phone != "" %>
+              <li><%= "<span>Cell/Mobile Phone:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.mobile_phone %><%= "<span> (Primary)</span>" if @profile.primary == 2 %></li>
+          <% end %>
+          <% if @profile.work_phone != nil && @profile.work_phone != "" %>
+              <li><%= "<span>Work Phone:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.work_phone %><%= "<span> (Primary)</span>" if @profile.primary == 3 %></li>
+          <% end %>
+      <% end %>
+
+
+
+      <% if @profile.social_security_number != nil || @profile.birth_date != nil || @profile.us_military_veteran != nil || @profile.us_citizen != nil %>
+          <%= "<h4>Personal Information</h4>" %>
+          <% if  @profile!=nil && @profile.user_type ==1 %>
+              <% if @profile.social_security_number != nil && @profile.social_security_number != "" %><%= "<li><span>Social Security Number:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.social_security_number+"</li>" %>
+              <% end %>
+              <% if @profile.birth_date != nil && @profile.birth_date != "" %><%= "<li><span>Date of Birth:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.birth_date+"</li>" %>
+              <% end %>
+              <% if @profile.us_military_veteran != nil && @profile.us_military_veteran != "" %><%= "<li><span>U.S. Military Veteran?:&nbsp;&nbsp;&nbsp;&nbsp;</span>" %>
+                  <% if @profile.us_military_veteran==1 %><%= "Yes" %>
+                      <% else %><%= "No" %>
+                      <% end %><%= "</li>" %>
+              <% end %>
+
+              <% if @profile.citizenship != nil %><%= "<li><span>Are you a US citizen?:&nbsp;&nbsp;&nbsp;&nbsp;</span>" %>
+                  <% if @profile.citizenship=="us" && @profile.citizenship != "" %><%= "Yes" %>
+                      <% else %><%= "No<br>" %>
+                      <% if @profile.us_citizen != nil %>
+                          <%= "<li>Are you a Resident Alien of the U.S.? :&nbsp;&nbsp;&nbsp;&nbsp" %>
+                      <% end %>
+                      <% if @profile.us_citizen==1 && @profile.us_citizen != "" %><%= "Yes" %>
+                          <% else %><%= "No<br>" %>
+                      <% end %>
+                      <% if @profile.us_citizen==1 && @profile.us_citizen != "" %>
+                          <%= "<li>Date your Resident Alien card was issued:&nbsp;&nbsp;&nbsp;&nbsp;"+ @profile.us_resident_alien+"</li>" %>
+                          <%= "<li>Card Number:&nbsp;&nbsp;&nbsp;&nbsp;"+ @profile.card_number+"</li>" %>
+                      <% else %>
+                          <% if @profile.citizenship_type==0 && @profile.citizenship_type != "" %>
+                              <%= "<li>Decision Pending :&nbsp;&nbsp;&nbsp;&nbsp; yes</li>" %>
+                          <% end %>
+                      <% end %>
+                      <% end %><%= "</li>" %>
+              <% end %>
+          <% end %>
+          <% if  @profile!=nil && @profile.user_type ==0 %>
+              <% if @profile.birth_date != nil && @profile.birth_date != "" %><%= "<li><span> Date of Birth:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.birth_date+"</li>" %>
+              <% end %>
+              <% if @profile.birth_country != nil && @profile.birth_country != "" %><%= "<li><span>Country of Birth:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.birth_country+"</li>" %>
+              <% end %>
+              <% if @profile.visa_type != nil && @profile.visa_type != "" %><%= "<li><span>Visa Type:&nbsp;&nbsp;&nbsp;&nbsp;</span>" %>
+                  <% if @profile.visa_type==1 %><%= "F1" %>
+                      <% elsif @profile.visa_type==2 %><%= "F2" %>
+                      <% elsif @profile.visa_type==3 %><%= "J1" %>
+                      <% elsif @profile.visa_type==4 %><%= "J2" %>
+                      <% elsif @profile.visa_type==5 %><%= "Other" %>
+                      <% end %><%= "</li>" %>
+              <% end %>
+              <% if @profile.visa_type != nil && @profile.visa_type ==5 %>
+                  <% if @profile.card_number != nil && @profile.card_number != "" %><%= "<li><span>Card number:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.card_number+"</li>" %>
+                  <% end %>
+                  <% if @profile.visa_date != nil && @profile.visa_date != "" %><%= "<li><span>Visa date:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.visa_date+"</li>" %>
+                  <% end %>
+
+              <% end %>
+          <% end %>
+      <% end %>
+
+      <% if @profile.us_resident_alien==1 %>
+          <%= "<h4>Residency Information</h4>" %>
+          <% if @profile.us_resident_alien==1 %>
+              <% if @profile.card_date != nil && @profile.card_date != "" %><%= "<li><span>Date your Resident Alien card was issued:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.card_date+"</li>" %>
+              <% end %>
+              <% if @profile.card_number != nil && @profile.card_number != "" %><%= "<li><span>Card number:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.card_number+"</li>" %>
+              <% end %>
+          <% end %>
+      <% end %>
+
+      <% if @profile.gender != nil && @profile.gender != "" || @profile.marital != nil && @profile.marital != "" || @profile.ethnic != nil && @profile.ethnic != "" || @profile.religious != nil && @profile.religious != "" %>
+          <%= "<h4>Optional Information</h4>" %>
+          <% if @profile.gender != nil && @profile.gender != "" %><%= "<li><span>Gender:&nbsp;&nbsp;&nbsp;&nbsp;</span>" %>
+              <% if @profile.gender==1 %><%= "Male" %>
+                  <% else %><%= "Female" %>
+                  <% end %><%= "</li>" %>
+          <% end %>
+          <% if @profile.marital != nil && @profile.marital != "" %><%= "<li><span>Marital Staus:&nbsp;&nbsp;&nbsp;&nbsp;</span>" %>
+              <% if @profile.marital==1 %><%= "Married" %>
+                  <% else %><%= "Single" %>
+                  <% end %><%= "</li>" %>
+          <% end %>
+          <% if @profile.ethnic != nil && @profile.ethnic != "" %><%= "<li><span>Ethnic Origin:&nbsp;&nbsp;&nbsp;&nbsp;</span>" %>
+              <% if @profile.ethnic==1 %><%= "American Indian or Alaskan Native" %>
+                  <% elsif @profile.ethnic==2 %><%= "Asian American or Pacific Islander" %>
+                  <% elsif @profile.ethnic==3 %><%= "African American" %>
+                  <% elsif @profile.ethnic==4 %><%= "Caucasian" %>
+                  <% elsif @profile.ethnic==5 %><%= "Hispanic/Latino" %>
+                  <% elsif @profile.ethnic==6 %><%= "Multi-racial" %>
+                  <% elsif @profile.ethnic==7 %><%= "Other" %>
+                  <% end %><%= "</li>" %>
+          <% end %>
+          <% if @profile.religious != nil && @profile.religious != "" %><%= "<li><span>Religious Preference:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@profile.religious+"</li>" %>
+          <% end %>
+      <% end %>
+    </ul>
+<% end %>
+
+
+<% if !@academics.empty? %>
+    <%= "<h3>Academic Information</h3>" %>
+    <ul>
+      <%= "<h4>Academic Background</h4>" %>
+
+      <% @academics.each do |academic| %>
+          <% @academic = academic %>
+
+          <% if @academic.institution != nil &&  @academic.institution != "" %><%= "<li><span>Institution:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@academic.institution+"</li>" %>
+          <% end %>
+          <% if @academic.city != nil &&  @academic.city != "" %><%= "<li><span>City:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@academic.city+"</li>" %>
+          <% end %>
+          <% if @academic.state != nil &&  @academic.state != "" %><%= "<li><span>State:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@academic.state+"</li>" %>
+          <% end %>
+          <% if @academic.degrees != nil &&  @academic.degrees != "" %><%= "<li><span>Degrees/Major:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@academic.degrees+"</li>" %>
+          <% end %>
+          <% if @academic.attend_date_start != nil &&  @academic.attend_date_start != ""  && @academic.attend_date_end != nil %><%= "<li><span> Dates Attended:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@academic.attend_date_start+" &nbsp;&nbsp;To&nbsp;&nbsp; "+@academic.attend_date_end+"</li>" %>
+          <% end %>
+          <% if @academic.complete != nil &&  @academic.complete != "" %><%= "<li><span>Completed:&nbsp;&nbsp;&nbsp;&nbsp;</span>" %>
+              <% if @academic.complete==1 %><%= "Yes" %>
+                  <% else %><%= "No" %>
+                  <% end %><%= "</li>" %>
+          <% end %>
+          <% if @academic.in_progress != nil &&  @academic.in_progress != "" %><%= "<li><span>In Progress:&nbsp;&nbsp;&nbsp;&nbsp;</span>" %>
+              <% if @academic.in_progress==1 %><%= "Yes" %>
+                  <% else %><%= "No" %>
+                  <% end %><%= "</li>" %>
+          <% end %>
+          <% if session[:isdom] == false %>
+              <% if @academic.academic_record != nil &&  @academic.academic_record != "" %><%= "<li><span>Name on Academic Record:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@academic.academic_record+"</li>" %>
+              <% end %>
+          <% end %>
+          <% if @academic.flag != 3 %>
+              <br/>
+          <% end %>
+      <% end %>
+
+      <% if @transcript !=nil %>
+          <% if @transcript.complete_bottom == 1 %>
+              <%= "<h4>Transcript release</h4>" %>
+              <% if @transcript.date != nil && @transcript.date != "" %><%= "<li><span>Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@transcript.date+"</li>" %>
+              <% end %>
+              <% if @transcript.signature != nil && @transcript.signature != "" %><%= "<li><span> Signature:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@transcript.signature+"</li>" %>
+              <% end %>
+          <% end %>
+      <% end %>
+    </ul>
+<% end %>
+
+
+
+
+<% if @careerinfo!= nil %>
+    <%= "<h3>Career Information</h3>" %>
+    <ul>
+      <% if @careerinfo.current_employer != nil && @careerinfo.current_employer != "" || @careerinfo.street != nil && @careerinfo.street != "" || @careerinfo.position != nil && @careerinfo.position != "" || @careerinfo.total_year != nil && @careerinfo.total_year != "" || @careerinfo.teaching_license != nil && @careerinfo.teaching_license != "" || @careerinfo.teaching_license_type != nil && @careerinfo.teaching_license_type != "" || @careerinfo.teaching_license_state != nil && @careerinfo.teaching_license_state != "" || @careerinfo.teaching_license_years != nil && @careerinfo.teaching_license_years != "" || @careerinfo.reason != nil && @careerinfo.reason != "" || @careerinfo.youth_or_adults != nil && @careerinfo.youth_or_adults != "" %>
+          <%= "<h4>Career Information</h4>" %>
+      <% end %>
+      <% if @careerinfo.current_employer != nil && @careerinfo.current_employer != "" %><%= "<li><span>Current Employer:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@careerinfo.current_employer+"</li>" %>
+      <% end %>
+      <% if @careerinfo.street != nil && @careerinfo.street != "" %><%= "<li><span> Mailing Address:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@careerinfo.street+"</li>" %>
+      <% end %>
+      <% if @careerinfo.position != nil && @careerinfo.position != "" %><%= "<li><span>Position or Title:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@careerinfo.position+"</li>" %>
+      <% end %>
+      <% if @careerinfo.total_year != nil && @careerinfo.total_year != "" %><%= "<li><span>Total Number of Years with Current Employer:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@careerinfo.total_year.to_s+"</li>" %>
+      <% end %>
+      <% if @careerinfo.teaching_license != nil && @careerinfo.teaching_license != "" %><%= "<li><span>Do you have a teaching license?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>" %>
+          <% if @careerinfo.teaching_license==0 %><%= "Yes" %>
+              <% else %><%= "No" %>
+              <% end %><%= "</li>" %>
+      <% end %>
+      <% if @careerinfo.teaching_license_type != nil && @careerinfo.teaching_license_type != "" %><%= "<li><span>If yes, what type?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@careerinfo.teaching_license_type+"</li>" %>
+      <% end %>
+      <% if @careerinfo.teaching_license_state != nil && @careerinfo.teaching_license_state != "" %><%= "<li><span>State:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@careerinfo.teaching_license_state+"</li>" %>
+      <% end %>
+      <% if @careerinfo.teaching_license_years != nil && @careerinfo.teaching_license_years != "" %><%= "<li><span>Years Taught:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@careerinfo.teaching_license_years.to_s+"</li>" %>
+      <% end %>
+      <% if @careerinfo.reason != nil && @careerinfo.reason != "" %><%= "<li><span> Describe the reason you are pursuing this degree:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@careerinfo.reason+"</li>" %>
+      <% end %>
+      <% if @careerinfo.youth_or_adults != nil && @careerinfo.youth_or_adults != "" %><%= "<li><span>List leadership experience with Children, Youth and/or Adults:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@careerinfo.youth_or_adults.to_s+"</li>" %>
+      <% end %>
+
+      <%= "<h4>Enrollment Plans</h4>" %>
+      <% if @careerinfo.state1 != nil && @careerinfo.state1 != "" %><%= "<li><span>Are you currently enrolled at Concordia University Portland?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>" %>
+          <% if @careerinfo.state1==0 %><%= "Yes" %>
+              <% else %><%= "No" %>
+              <% end %><%= "</li>" %>
+      <% end %>
+      <% if @careerinfo.state2 != nil && @careerinfo.state2 != "" %><%= "<li><span>Have you previously applied for graduate admission at Concordia University Portland?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>" %>
+          <% if @careerinfo.state2==0 %><%= "Yes" %>
+              <% else %><%= "No" %>
+              <% end %><%= "</li>" %>
+      <% end %>
+      <% if @careerinfo.state3 != nil && @careerinfo.state3 != "" %><%= "<li><span> I plan to apply for student loans through Concordia Portland:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>" %>
+          <% if @careerinfo.state3==1 %><%= "Yes" %>
+              <% else %><%= "No" %>
+              <% end %><%= "</li>" %>
+      <% end %>
+      <% if @careerinfo.state2==0 %>
+          <% if @careerinfo.semester != nil %><%= "<li><span>The Semester:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@careerinfo.semester+"</li>" %>
+          <% end %>
+          <% if @careerinfo.year != nil %><%= "<li><span>The Year:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@careerinfo.year+"</li>" %>
+          <% end %>
+      <% end %>
+    </ul>
+<% end %>
+
+<% if !@references.empty? %>
+    <%= "<h3>Uploaded</h3>" %>
+    <ul>
+      <%= "<h4>Your Uploaded Files</h4>" %>
+      <% @references.each do |reference| %>
+          <% @reference = reference %>
+          <% if @reference.file_real_name != nil %><%= "<li><span>File:&nbsp;&nbsp;&nbsp;&nbsp;</span>"+@reference.file_real_name+"</li>" %>
+          <% end %>
+      <% end %>
+    </ul>
+<% end %>
+
+<a onclick="window.close()" href="#" style=" float:right;padding-right:20px;">
+  <img border="0" src="/images/hc/close.gif"/>
+</a>
+</div>
+</div>
+<div class="main_bottom_success"></div>
+</div>
+</body>

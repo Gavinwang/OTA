@@ -1,0 +1,302 @@
+<body onload="displayDiv();">
+<div class="main">
+
+<div class="content_div_success">
+<form name="insemplForm" action="/instructorempl/create" method="post">
+<%= errors_for @insempl, [:instructor_name, :address, :email, :home_phone, :work_phone,:cell_phone, :ss, :current_employer, :membership, :teach_areas, :current_teaching, :edu_bg, :experience, :honors, :convicted_felony, :highest_degree, :signature, :signature_date] %>
+<%= errors_for @indivdual_1, [:name, :email, :phone] %>
+<%= errors_for @indivdual_2, [:name, :email, :phone] %>
+<%= errors_for @indivdual_3, [:name, :email, :phone] %>
+<div class="main_right_success"></div>
+<div class="content_index_left" align="left">
+Concordia is a Christian university preparing leaders for the transformation of society. Affiliated with The Lutheran
+Church-Missouri Synod, Concordia is an accredited, four-year university that combines liberal arts and professional
+programs to provide an educational setting with a Christian perspective where students and faculty enjoy the freedom to
+live in an environment of trust, forgiveness and respect. <br><br>
+Concordia does not discriminate in the employment of individuals on the basis of race, color, national or ethnic origin,
+disability, sex or age. However, as an institution of The Lutheran Church-Missouri Synod, and as allowed by law,
+Concordia does require that teaching faculty are Christian.<br><br>
+If you are interested in partnering with our College in the preparation of exceptional educators, please submit via
+email this application and a current resume that includes your higher education and employment history as well as any
+higher education online teaching experience. <br><br>
+
+<div class="contright_cont">
+<div style="width:394px; float: left;">
+  <div class="userInfo">
+    <ul>
+      <li><span class="label" style="width:105px;">* Name:</span>
+        <input name="instructor_employment[instructor_name]" maxlength="60" size="42" type="text" value="<%= @insempl.instructor_name if @insempl!=nil %>">
+        <%= has_error @insempl, :instructor_name %>
+      </li>
+      <li><span class="label" style="width:105px;">*Mailing Address:</span>
+        <textarea style="margin-left: 14px;" name="instructor_employment[address]" cols="29" rows="4"><%= @insempl.address if @insempl!=nil %></textarea>
+        <%= has_error @insempl, :address %>
+      </li>
+    </ul>
+  </div>
+</div>
+<div style="width:318px;float: left;">
+  <div class="userInfo">
+    <ul>
+      <li><span class="label" style="width:88px;">* E-mail:</span>
+        <input name="instructor_employment[email]" maxlength="100" size="30" type="text" value="<%= @insempl.email if @insempl!=nil %>">
+        <%= has_error @insempl, :email %>
+      </li>
+      <li><span class="label" style="width:88px;">*Home Phone:</span>
+        <input name="instructor_employment[home_phone]" maxlength="20" size="30" type="text" value="<%= @insempl.home_phone if @insempl!=nil %>">
+        <%= has_error @insempl, :home_phone %>
+      </li>
+      <li><span class="label" style="width:88px;">* Work Phone:</span>
+        <input name="instructor_employment[work_phone]" maxlength="20" size="30" type="text" value="<%= @insempl.work_phone if @insempl!=nil %>">
+        <%= has_error @insempl, :work_phone %>
+      </li>
+      <li><span class="label" style="width:88px;">Cell Phone:</span>
+        <input name="instructor_employment[cell_phone]" maxlength="20" size="30" type="text" value="<%= @insempl.cell_phone if @insempl!=nil %>">
+        <%= has_error @insempl, :cell_phone %>
+      </li>
+    </ul>
+    <br>
+  </div>
+</div>
+
+<div class="userInfo">
+  <ul>
+    <li><span style="padding-left:20px;">* <b>Current employer</b>:</span>
+      <input name="instructor_employment[current_employer]" maxlength="200" size="85" type="text" value="<%= @insempl.current_employer if @insempl!=nil %>">
+      <%= has_error @insempl, :current_employer %>
+    </li>
+    <div style="width:400px; float: left;">
+      <div class="userInfo">
+        <ul>
+          <li style="padding-left:20px;">* <b>Church membership or denominational affiliation:</b><br>
+
+            <div style="padding-left:9px;">Please attach a brief statement of
+              your philosophy of teaching,<br> no more than one page, that includes an explanation of how <br>you
+              integrate your faith in your teaching.
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div style="width:300px; float: left;">
+      <div class="userInfo">
+        <ul>
+          <li>
+            <textarea name="instructor_employment[membership]" style=""  rows="4" cols="32"><%= @insempl.membership if @insempl!=nil %></textarea>
+            <%= has_error @insempl, :membership %>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <li>
+      <span style="padding-left:20px;">* <b>When you are available to teach (check all that apply)</b>:</span>
+      <input name="instructor_employment[fall]" id="fall" size="35" type="checkbox"
+             <% if @insempl!=nil && @insempl.fall==0 %>checked="checked"
+             <% end %>>Fall
+      <input name="instructor_employment[spring]" id="spring" size="35" type="checkbox"
+             <% if @insempl!=nil && @insempl.spring==0 %>checked="checked"
+             <% end %>>Spring
+      <input name="instructor_employment[summer]" id="summer" size="35" type="checkbox"
+             <% if @insempl!=nil && @insempl.summer==0 %>checked="checked"
+             <% end %>>Summer
+      <input name="instructor_employment[other]" type="hidden" id="other">
+      <%= has_error @insempl, :other %>
+    </li>
+
+    <br>
+    <li>
+      <span style="padding-left:20px;">*<b>Please list those areas in which you are qualified to teach:</b></span>
+      <textarea style="margin-left:30px;" name="instructor_employment[teach_areas]" cols="78"  rows="3"><%= @insempl.teach_areas if @insempl!=nil %></textarea>
+      <%= has_error @insempl, :teach_areas %>
+    </li>
+    <li>
+      <span style="padding-left:20px;">* <b>Current teaching and/or administrative responsibilities</b>:</span>
+      <textarea style="margin-left:30px;" name="instructor_employment[current_teaching]" cols="78"  rows="3"><%= @insempl.current_teaching if @insempl!=nil %></textarea>
+      <%= has_error @insempl, :current_teaching %>
+    </li>
+    <li>
+      <span style="padding-left:20px;">* <b>Educational background(include grades taught P-12 & experience with diverse
+        student populations)</b> :</span>
+      <textarea style="margin-left:30px;" name="instructor_employment[edu_bg]"  cols="78" rows="3"><%= @insempl.edu_bg if @insempl!=nil %></textarea>
+      <%= has_error @insempl, :edu_bg %>
+    </li>
+    <li>
+      <span style="padding-left:20px;">* <b>Honors received</b> :</span>
+      <textarea style="margin-left:30px;" name="instructor_employment[honors]"  cols="78" rows="3"><%= @insempl.honors if @insempl!=nil %></textarea>
+      <%= has_error @insempl, :honors %>
+    </li>
+    <li>
+      <span style="padding-left: 20px;">* <b>Have you ever been convicted of a felony? </b>:</span>
+      <input type="radio" name="instructor_employment[convicted_felony]" value="0"
+             <% if @insempl!=nil && @insempl.convicted_felony==0 %>checked="checked"
+             <% end %>> Yes<input type="radio" name="instructor_employment[convicted_felony]" value="1"
+    <% if @insempl!=nil && @insempl.convicted_felony==1 %>checked="checked"
+                                  <% end %>>No
+      <%= has_error @insempl, :convicted_felony %>
+    </li>
+    <li>
+      <span style="padding-left: 20px;">* <b>Highest degree attained</b>:</span>
+      <input name="instructor_employment[highest_degree]" maxlength="200" size="78" value="<%= @insempl.highest_degree if @insempl!=nil %>">
+      <%= has_error @insempl, :highest_degree %>
+    </li>
+    <div style="width:315px; float: left;">
+      <div class="userInfo">
+        <ul>
+          <li style="padding-left:20px;">*
+            <b>Total years of experience in your profession<br>&nbsp;&nbsp;&nbsp;(Include all teaching and
+              administration)</b>:
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div style="width:380px; float: left;">
+      <div class="userInfo">
+        <ul>
+          <li>
+            <input name="instructor_employment[experience]" maxlength="20" size="57" value="<%= @insempl.experience if @insempl!=nil %>">
+            <%= has_error @insempl, :experience %>
+          </li>
+        </ul>
+        <br> <br>
+      </div>
+    </div>
+
+    <div>
+      <li style="padding-left:5px;text-align:center;">
+        <b>References - Please provide the names and contact information of three individuals who are familiar
+          with
+          your work.</b>
+      </li>
+    </div>
+    <div style="width: 33%; float: left;">
+      <div class="userInfo">
+        <ul>
+          <li><span style="padding-left:60px">* <b>Name</b></span>
+            <input name="individual_1[name]" maxlength="60" size="30" type="text" value="<%= @indivdual_1.name if @indivdual_1!=nil %>">
+            <%= has_error @indivdual_1, :name %>
+          </li>
+          <li>
+            <input style="margin-left: 14px;" name="individual_2[name]" maxlength="60" size="30" value="<%= @indivdual_2.name if @indivdual_2!=nil %>">
+            <%= has_error @indivdual_2, :name %>
+          </li>
+          <li>
+            <input style="margin-left: 14px;" name="individual_3[name]" maxlength="60" size="30" value="<%= @indivdual_3.name if @indivdual_3!=nil %>">
+            <%= has_error @indivdual_3, :name %>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div style="width: 33%; float: left;">
+      <div class="userInfo">
+        <ul>
+          <li><span style="padding-left:60px">* <b>Phone Number</b></span>
+            <input name="individual_1[phone]" maxlength="20" size="30" type="text" value="<%= @indivdual_1.phone if @indivdual_1!=nil %>">
+            <%= has_error @indivdual_1, :phone %>
+          </li>
+          <li>
+            <input style="margin-left: 14px;" name="individual_2[phone]" maxlength="20" size="30" value="<%= @indivdual_2.phone if @indivdual_2!=nil %>">
+            <%= has_error @indivdual_2, :phone %>
+          </li>
+          <li>
+            <input style="margin-left: 14px;" name="individual_3[phone]" maxlength="20" size="30" value="<%= @indivdual_3.phone if @indivdual_3!=nil %>">
+            <%= has_error @indivdual_3, :phone %>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div style="width: 34%; float: left;">
+      <div class="userInfo">
+        <ul>
+          <li><span style="padding-left:60px">* <b>Email Address</b></span>
+            <input name="individual_1[email]" maxlength="100" size="30" type="text" value="<%= @indivdual_1.email if @indivdual_1!=nil %>">
+            <%= has_error @indivdual_1, :email %>
+          </li>
+          <li>
+            <input style="margin-left: 14px;" name="individual_2[email]" maxlength="100" size="30" value="<%= @indivdual_2.email if @indivdual_2!=nil %>">
+            <%= has_error @indivdual_2, :email %>
+          </li>
+          <li>
+            <input style="margin-left: 14px;" name="individual_3[email]" maxlength="100" size="30" value="<%= @indivdual_3.email if @indivdual_3!=nil %>">
+            <%= has_error @indivdual_3, :email %>
+          </li>
+        </ul>
+        <br>
+      </div>
+    </div>
+    <div style="padding-left:12px">
+      I hereby certify that the statements made in the above employment application are true and complete, to the best
+      of my knowledge, and I authorize the investigation of those statements. I understand that falsification,
+      misrepresentation, or omission of facts will be sufficient cause for elimination of any consideration for
+      employment or cause for dismissal from Concordia University, if employed.
+      <br><br>
+      I understand that all faculty are expected to model their Christian values within the online education community
+      and teach in a manner that will support the mission of Concordia University.
+      <br><br>
+      I agree that I have read and understand the above acknowledgements and recognize all of the above conditions of my
+      employment.
+      <br><br>
+      I agree to the reproduction and dissemination of this form.
+      <br>
+      <br>
+      <br>
+    </div>
+    <div style="padding-left:20px;width:400px; float: left;">
+      <div class="userInfo">
+        <ul>
+          <li><span>* Signature(Type in Name):</span>
+            <input name="instructor_employment[signature]" maxlength="100" size="30" type="text" value="<%= @insempl.signature if @insempl!=nil %>">
+            <%= has_error @insempl, :signature %>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div style="width:270px; float: left;">
+      <div class="userInfo">
+        <ul>
+          <li><span>* Date:</span>
+            <input readonly name="instructor_employment[signature_date]" maxlength="100" size="25" type="text" value="<%= Time.now.strftime("%d/%m/%Y") %>">
+            <%= has_error @insempl, :signature_date %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </ul>
+</div>
+<br>
+<br>
+<br>
+<a href="#" style="float:right;padding-right:30px;" onclick="submitForm();"><img src="/images/hc/NEXT.gif" border="0"/></a>
+</div>
+</div>
+<div class="main_bottom_success"></div>
+</form>
+</div>
+
+
+</div>
+<script type="text/javascript">
+    function submitForm() {
+        if ($('summer').checked) {
+            $('other').value = 1;
+        }
+        if ($('fall').checked) {
+            $('other').value = 1;
+        }
+        if ($('spring').checked) {
+            $('other').value = 1;
+        }
+        document.insemplForm.submit();
+    }
+
+    function displayDiv() {
+        var cw = document.getElementsByName("cw");
+        for (var i = 0; i < cw.length; i++) {
+            if (i > 0) {
+                cw[i].innerHTML = "";
+                cw[i].style.display = "none";
+            }
+        }
+    }
+
+</script>
+</body>

@@ -1,0 +1,57 @@
+<body>
+<div class="main">
+  <div align="center"><span style="color:red;"></span></div>
+  <form name="createpwd" action="/newpwd/createpwd" method="post">
+    <div style="overflow:auto;width:366px; margin:0 auto;">
+      <div class="content_div"> 
+        <span style="color:red;" id="hint_"><%= flash[:notice] %></span>
+        <span style="color:red;" id="hint_p1"> </span>
+        <span style="color:red;" id="hint_p2"> </span>
+        <div class="content_title" style="text-align:center">Create New Password</div>
+        <div class="content_cont_white">
+          <div class="userInfo">
+            <ul>
+              <li><span class=label style="font-size:12px; font-weight:bold">Your New Password:</span>
+                <input name="pwd1" id="pwd1" type="password" maxlength="20" onblur="checkPwd1()" value="<%=  %>"><br/>
+              </li>
+              <li><span class=label style="font-size:12px; font-weight:bold">Re-Enter Password:</span>
+                <input name="pwd2" id="pwd2" type="password" maxlength="20" onblur="comparePwd()"> <br/>
+              </li>
+            </ul>
+          </div>
+          <br/>
+          <input type="hidden" name="login_name" value="<%=@loginName%>">
+          <a href="#" style="margin-left:160px;" onclick="createpwdFormSubmit()"><img src="/images/hc/createpwd.gif" border="0"/></a><br/><br/>
+          <span style="padding-left:50px">* After you create your new password, you will be logged in automatically.<br/></span>
+          <br/>
+        </div>
+      </div>
+    </div>
+    <br/>
+
+    <div class="content_cont_white">
+      <span style="font-size:12px; font-weight:bold;display:block;text-align:center;">Problems logging in? Contact 1-877-251-4405 or
+        <a href="mailto:admissions@concordiaonline.net" class="help">admissions@concordiaonline.net</a></span>
+    </div>
+  </form>
+</div>
+<script>
+    function createpwdFormSubmit() {
+        if(!checkPwd1()){return }
+        if(!comparePwd()){return }
+        document.createpwd.submit();
+    }
+    function checkPwd1() {
+        if ($("pwd1").value.length < 6) {
+            $("hint_p1").innerHTML = " Passwords must be at least six characters.";
+            return false;
+        } return true;
+    }
+    function comparePwd() {
+        if ($("pwd2").value != $("pwd1").value) {
+             $("hint_p2").innerHTML = "Re-Enter Password  is not consistent with New Password.";
+            return false;
+        } return true;
+    }
+</script>
+</body>

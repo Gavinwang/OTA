@@ -1,0 +1,100 @@
+<body onload="displayDiv()">
+<form name="employmentForm" action="/careerinfo/create" method="post">
+  <div class="main_right">
+  <%= errors_for @careerinfo, [:current_employer,:street,:position,:total_year,:teaching_license_type,:teaching_license_state,:teaching_license_years,:teaching_license,:state1,:state2,:semester,:year] %>
+    <span style="color: Red; display:none;" id="hint_phone_num">* Some required information is missing or incomplete. Please check your entries and try again.</span>
+    <div class="content_div">
+      <div class="contright_title">Career Information</div>
+      <div class="contright_cont">
+        <div class="userInfo">
+          <ul>
+            <li><span class=label>Current Employer</span>
+              <input name="careerinfo[current_employer]" maxlength="100" id="current_employer" size="25" type="text" value="<%= @careerinfo.current_employer if @careerinfo!=nil%>"/>
+    <%= has_error @careerinfo, :current_employer %>
+            </li>
+              <li><span class=label>Mailing  Address</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <textarea rows="6" cols="30" name="careerinfo[street]" style="overflow:hidden;"><%= @careerinfo.street if @careerinfo!=nil%></textarea>
+    <%= has_error @careerinfo, :street %>
+            </li>
+              <li><span class=label>Position or Title</span>
+                <input name="careerinfo[position]" maxlength="100" id="position" size="25" type="text" value="<%= @careerinfo.position if @careerinfo!=nil%>" />
+    <%= has_error @careerinfo, :position %>
+            </li>
+              <li><span class=label>Total Number of Years with
+                Current Employer</span>
+                <input name="careerinfo[total_year]"  maxlength="10" id="total_year" size="25" type="text" value="<%= @careerinfo.total_year if @careerinfo!=nil%>" />
+    <%= has_error @careerinfo, :total_year %>
+            </li>
+              <li><span class=label>Do you have a teaching license?</span>
+                <input name="careerinfo[teaching_license]" type="radio" value="0" <%="checked=\"checked\"" if @careerinfo!=nil && @careerinfo.teaching_license ==0%>>Yes  <input name="careerinfo[teaching_license]" type="radio" value="1" <%="checked=\"checked\"" if @careerinfo!=nil && @careerinfo.teaching_license ==1%>>No
+     <%= has_error @careerinfo, :teaching_license %>
+               </li>
+              <li><span class=label>If yes,what type?</span>
+                 <input name="careerinfo[teaching_license_type]" maxlength="100" size="25" type="text" value="<%= @careerinfo.teaching_license_type if @careerinfo!=nil%>" />
+    <%= has_error @careerinfo, :teaching_license_type %>
+            </li>
+		    <li><span class=label>State</span>
+                    <input name="careerinfo[teaching_license_state]" maxlength="100" size="25" type="text" value="<%= @careerinfo.teaching_license_state if @careerinfo!=nil%>" />
+    <%= has_error @careerinfo, :teaching_license_state %>
+            </li>			
+		   	<li><span class=label>Years Taught</span>
+                   <input name="careerinfo[teaching_license_years]" maxlength="10" size="25" type="text" value="<%= @careerinfo.teaching_license_years if @careerinfo!=nil%>" />
+    <%= has_error @careerinfo, :teaching_license_years %>
+            </li>
+            <li><span class=label>Describe the reason you are
+                pursuing this degree</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                <textarea rows="6" cols="30"  name="careerinfo[reason]" style="overflow:hidden;"><%= @careerinfo.reason if @careerinfo!=nil%></textarea>
+            </li>
+              <li><span class=label> List leadership experience
+                with Children, Youth and/or Adults</span>&nbsp;&nbsp;&nbsp;&nbsp;
+          <textarea rows="6" cols="30" name="careerinfo[youth_or_adults]" style="overflow:hidden;"><%= @careerinfo.youth_or_adults if @careerinfo!=nil%></textarea>
+            </li>
+          </ul>
+        </div>
+      </div></div>
+    <div class="content_div">
+      <div class="contright_title">Enrollment Plans</div>
+      <div class="userInfo"><br />
+          <ul>
+            <li><span class=label>* Are you currently enrolled at Concordia University-Portland?</span>
+              <input name="careerinfo[state1]" type="radio" value="0" <%= "checked=\"checked\"" if @careerinfo!=nil && @careerinfo.state1==0 %> />Yes
+              <input name="careerinfo[state1]" type="radio" value="1" <%= "checked=\"checked\"" if @careerinfo!=nil && @careerinfo.state1==1 %> />No
+                  <%= has_error @careerinfo, :state1 %>
+            </li>
+            <li><span class=label>* Have you previously applied for graduate admission at Concordia University-Portland?</span>
+              <input name="careerinfo[state2]" id="state2" type="radio" value="0" onclick="checkThis(this);"  <%= "checked=\"checked\"" if @careerinfo!=nil && @careerinfo.state2==0 %> />Yes
+              <input name="careerinfo[state2]" type="radio" value="1" onclick="checkThis(this);" <%= "checked=\"checked\"" if @careerinfo!=nil && @careerinfo.state2==1 %> />No
+                  <%= has_error @careerinfo, :state2 %>
+            </li>
+			</ul>
+			<ul id="semester" <% if @careerinfo==nil%>style="display:none"<%end%><% if @careerinfo!=nil && @careerinfo.state2!=0 %>style="display:none"<% end %> <% if @careerinfo!=nil && @careerinfo.state2==0 %>style="display:"<% end %> >
+			<li><span class=label>Semester</span>
+			<input name="careerinfo[semester]" maxlength="100" id="semester2" type="text" value="<%= @careerinfo.semester if @careerinfo!=nil %>"/><span id="hint_2" class="mark"></span>
+              <%= has_error @careerinfo, :semester %>
+            </li>
+			<li><span class=label>Year</span>
+			<input id="year" name="careerinfo[year]" maxlength="4" type="text" value="<%= @careerinfo.year if @careerinfo!=nil %>"><span id="hint_3" class="mark"></span>
+              <%= has_error @careerinfo, :year %>
+            </li>
+		   </ul>
+		<div align="right">
+      <br />
+        <a href="#" onclick="careerinfoSubmit();"><img src="/images/hc/SaveandNext.gif" style="border-style: none; border-width: 0px;"></a>
+        </div>
+	  </div>
+    </div>
+  </div>
+       <div class="main_bottom"></div>
+</form>
+<script>
+       function displayDiv() {
+        var cw = document.getElementsByName("cw");
+        for (var i = 0; i < cw.length; i++) {
+            if (i > 0) {
+                cw[i].innerHTML = "";
+                cw[i].style.display = "none";
+            }
+        }
+    }
+</script>
+</body>

@@ -1,0 +1,83 @@
+<body>
+<div class="main">
+  <form name="updateForm" action="/instructorempl/success" method="post">
+    <%= errors_for @insempl, [:instructor_name, :address,:last_four_ss, :birth_date, :todays_date, :signature2] %>
+
+    <div class="main_right_success"></div>
+
+    <div class="content_div_success">
+
+      <div class="content_index_left" align="left">
+
+        Thank you for applying at Concordia University.We appreciate your interest in the important work of Concordia. Much of the success at Concordia can be attributed to the quality and caliber of our employees.<br><br>
+
+        As a condition of an offer being made to you, we require that a detailed background check be conducted.<b> Please read carefully, and then sign the following authorization.</b>Thank you for your cooperation!<br><br>
+
+       I hereby authorize Concordia University and its agents/designees to investigate my background and application for employment; including  but not limited to requesting and reviewing any information concerning my education, my previous employment or work history, any motor vehicle records regarding me, and my criminal conviction records.  I hereby authorize every prior employer of mine to provide Concordia University or its agent/designees any and all information concerning my employment and background.<br><br>
+
+        I understand that prior to signing this authorization, I have the right to end the application process and not submit to the screens specified in this authorization, but I have voluntarily decided to authorize Concordia University to utilize these screens.<br><br>
+
+        I hereby confirm that I fully and forever release Concordia University and its agents/designees from any legal liability or claim for damages, including attorney fees or costs, arising from Concordia University and its agents/designees retrieving or acting on information pursuant to its background investigation of me.<br><br>
+
+
+        <div class="content_div">
+          <div class="contright_cont">
+            <div class="userInfo">
+              <ul>
+                <div style="width:310px;; float: left;">
+                  <div class="userInfo">
+                    <ul>
+                      <li><span class="label" style="width:100px;">* Name:</span>
+                        <input name="instructor_employment[instructor_name]" maxlength="100" size="30" type="text"  value ="<%= @insempl.instructor_name if @insempl!=nil %>">
+                        <%= has_error @insempl, :instructor_name %>
+                      </li>
+                      <li><span class="label" style="width:100px;">* Address:</span>
+                        <textarea style="margin-left: 14px;" name="instructor_employment[address]" cols="20" rows="3"><%= @insempl.address if @insempl!=nil %></textarea>
+                        <%= has_error @insempl, :address %>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div style="width:380px; float: left;">
+                  <div class="userInfo">
+                    <ul>
+                      <li><span class="label">* Last four of SS#:</span>
+                        <input name="instructor_employment[last_four_ss]" maxlength="4" size="30" type="text" value ="<%= @insempl.last_four_ss if @insempl!=nil %>">
+                        <%= has_error @insempl, :last_four_ss %>
+                      </li>
+                      <li><span class="label">* Birth Date<br>(MM/DD/YYYY):</span>
+                        <input name="instructor_employment[birth_date]" maxlength="10" size="30" type="text" value ="<%= @insempl.birth_date if @insempl!=nil %>">
+                        <%= has_error @insempl, :birth_date %>
+                      </li>
+                      <li><span class="label">* Today's Date:</span>
+                        <input name="instructor_employment[todays_date]" maxlength="10" readonly size="30" type="text" value ="<%= Time.now.strftime("%d/%m/%Y")%>">
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <br>
+
+                <li>
+                  <span style="padding-left: 25px;">* Signature(Type in Name):</span>
+                  <input name="instructor_employment[signature2]" maxlength="100" size="30" type="text" value ="<%= @insempl.signature2 if @insempl!=nil %>">
+                  <%= has_error @insempl, :signature2 %>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div align="right"><a href="#" onclick="submit();"><img src="/images/hc/submit.gif" border="0"/></a></div>
+      </div>
+    </div>
+
+    <div class="main_bottom_success"></div>
+  </form>
+</div>
+<script type="text/javascript">
+  function submit(){
+      document.updateForm.submit();
+  }
+        
+</script>
+</body>

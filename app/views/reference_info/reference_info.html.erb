@@ -1,0 +1,58 @@
+<div class="main_right" style="height:675px">
+  <div class="content_div">
+    <div class="contright_title">Download Forms</div>
+    <div class="contright_cont">
+      <%= link_to 'Letter of Reference Form', :action=>'download', :filename=>'CU-MEd-LetterOfReferenceForm_v1r4.doc' %>
+      <br/>
+      <% if session[:isdom] == true %>
+      <br/>
+      <%= link_to 'Financial Guarantee Form', :action=>'downloadintel', :filenameintel=>'CU-MEd-FinancialGuarantee-INT_v1r1.pdf' %>
+      <br/>
+      <% end %>    
+    </div>
+  </div>
+  <div class="content_div">
+    <div class="contright_title">Upload Your Completed Form(s)</div>
+    <div class="contright_cont" id="hint_file">Please select a valid file for uploading.(only .doc or .pdf)<br/>
+      <% if @references!= nil %>
+          <% for r in @references %>
+              <%= r.file_real_name %>&nbsp;&nbsp;&nbsp;<a href="/reference_info/delete?id=<%= r.id %>">remove</a><br>
+          <% end %>
+      <% end %>
+      <br/>
+
+      <form method="post" name="form1" action="/reference_info/upload" enctype="multipart/form-data" onsubmit="return uploadFormat()">
+        <input name="file" id="file" type="file"/>
+        <br>
+        <br>
+        <a href="#" onclick="submitUpload();" ><img src="/images/hc/upload.gif" style="border-style: none; border-width: 0px;"></a><br/>
+        <span style="color:red;" id="hint_upload"></span>
+        <br/><br/>
+        <a onclick="" href="/profile/review" style=" float:right">
+          <img border="0" src="/images/hc/SaveandNext.gif"/>
+        </a>
+      </form>
+      <br/>
+    </div>
+  </div>
+</div>
+      <div class="main_bottom"></div>
+<script>
+    function uploadFormat() {
+        var upload = document.getElementById("file");
+        var hint_upload = document.getElementById("hint_upload")
+        var hint_file = document.getElementById("hint_file");
+        if (!/.+(\.doc|\.pdf)/.exec(upload.value)) {
+            hint_file.style.color = "red";
+            hint_upload.innerHTML="The file you uploaded is not a valid file!";
+            return false;
+        }
+        return true;
+    }
+    function submitUpload() {
+        if(!uploadFormat()){
+            return;
+        }
+        document.form1.submit();
+    }
+</script>

@@ -1,0 +1,17 @@
+<form name="reviewForm" action="/authorization/authorization" method="post">
+  <div class="main_right" style="height:675px">
+    <div class="content_div">
+      <div class="contright_title">Review Application</div>
+      <div class="contright_cont">Click on the <i><a href="/view/view" target="_blank">View Application</a></i> button below to open your completed   applications in a new browser window. The application will be in printer-ready   format. To make changes, use the menu to go back to the section to be changed. <br /><br />
+
+<!--<a href="#"><img src="images/selectDegreeProgram.gif" border="0" /></a>-->
+        <br />
+        <div align="center">
+      <br />
+<% if session[:issubmit] != 1 %><a href="#" onclick="reviewSubmit();" ><img src="/images/hc/submit.gif" border="0"></a><% end %>
+</div>
+	  </div>
+    </div>
+  </div>
+        <div class="main_bottom"></div>
+</form>

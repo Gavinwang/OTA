@@ -1,0 +1,503 @@
+<body onload="changeCC();alien();changeVisa();displayDiv()">
+<form name="personalForm" action="/personal/update" method="post">
+<%= errors_for @profile, [:con_name, :con_last_name, :con_legal_first_name, :home_phone, :mobile_phone, :work_phone, :mail_street, :mail_city, :mail_state, :mail_zip_code, :permant_street, :permant_state, :permant_country, :permant_regional_code, :email_primary, :email_secondary, :birth_date, :social_security_number, :us_military_veteran, :card_number, :us_resident_alien, :mail_country, :citizenship, :birth_country, :permant_city,:primary] %>
+
+<div class="main_right">
+<div align="center"><span style="color: Red; display:none;"   id="hint_phone_num">&nbsp;&nbsp; * Some required information is missing or incomplete. Please check your entries and try again.</span></div>
+
+<div class="content_div">
+  <div class="contright_title">Contact Information</div>
+  <div class="contright_cont">                                              
+    <div class="userInfo">
+      <ul>
+        <li><span class=label>* Name:</span>
+          <input name="profile[con_name]" maxlength="100" size="25" type="text" value="<%= @profile.con_name if @profile!=nil %>">
+          <%= has_error @profile, :con_name %>
+        </li>
+        <li><span class=label>* Last Name:</span>
+          <input name="profile[con_last_name]" maxlength="100" size="25" type="text" value="<%= @profile.con_last_name if @profile!=nil %>">
+          <%= has_error @profile, :con_last_name %>
+        </li>
+        <li><span class=label>* Legal First Name:</span>
+          <input name="profile[con_legal_first_name]" maxlength="100" size="25" type="text" value="<%= @profile.con_legal_first_name if @profile!=nil %>">
+          <%= has_error @profile, :con_legal_first_name %>
+        </li>
+        <li><span class=label>Middle Name:</span>
+          <input name="profile[con_middle_name]" maxlength="100" size="25" type="text" value="<%= @profile.con_middle_name if @profile!=nil %>">
+        </li>
+        <li><span class=label>Preferred First Name:</span>
+          <input name="profile[con_prefered_first_name]" maxlength="100" size="25" type="text" value="<%= @profile.con_prefered_first_name if @profile!=nil %>">
+        </li>
+        <li><span class=label> Other name(s) on Academic Records:</span>
+          <input name="profile[con_other_name]" maxlength="100" size="25" type="text" value="<%= @profile.con_other_name if @profile!=nil %>">
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<% if @profile!=nil && @profile.user_type==0 %>
+    <div class="content_div">
+      <div class="contright_title">Mailing Address</div>
+      <div class="contright_cont">
+        <div class="userInfo">
+          <ul>
+            <li><span class=label>* Street:</span>
+              <input name="profile[mail_street]" maxlength="100" id="mstreet" size="25" type="text" value="<%= @profile.mail_street if @profile!=nil %>">
+              <%= has_error @profile, :mail_street %>
+            </li>
+            <li><span class=label>* City/Province:</span>
+              <input name="profile[mail_city]" maxlength="100" id="mcity" size="25" type="text" value="<%= @profile.mail_city if @profile!=nil %>">
+              <%= has_error @profile, :mail_city %>
+            </li>
+            <li><span class=label>* State/Region:</span>
+              <input name="profile[mail_state]" maxlength="100" id="mstate" size="25" type="text" value="<%= @profile.mail_state if @profile!=nil %>">
+              <%= has_error @profile, :mail_state %>
+            </li>
+            <li><span class=label>* Country:</span>
+              <select name="profile[mail_country]" id="mcountry">
+                <% @country.each do |temp| %>
+                    <% if @profile !=nil && @profile.mail_country == temp[:country_code] %>
+                        <%= "<option value=\""+temp[:country_code]+"\" selected=\"selected\">"+temp[:country_name]+"</option>" %>
+                    <% else %>
+                        <%= "<option value=\""+temp[:country_code]+"\" >"+temp[:country_name]+"</option>" %>
+                    <% end %>
+                <% end %>
+              </select>
+              <%= has_error @profile, :mail_country %>
+            </li>
+            <li><span class=label>* Regional Code:</span>
+              <input name="profile[mail_zip_code]" maxlength="100" id="mzip" size="25" type="text" value="<%= @profile.mail_zip_code if @profile!=nil %>">
+              <%= has_error @profile, :mail_zip_code %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+<% end %>
+
+<% if @profile!=nil && @profile.user_type==1 %>
+    <div class="content_div">
+      <div class="contright_title">Mailing Address</div>
+      <div class="contright_cont">
+        <div class="userInfo">
+          <ul>
+            <li><span class=label>* Street:</span>
+              <input name="profile[mail_street]" maxlength="100" id="mstreet" size="25" type="text" value="<%= @profile.mail_street if @profile!=nil %>">
+              <%= has_error @profile, :mail_street %>
+            </li>
+            <li><span class=label>* City:</span>
+              <input name="profile[mail_city]" maxlength="100" id="mcity" size="25" type="text" value="<%= @profile.mail_city if @profile!=nil %>">
+              <%= has_error @profile, :mail_city %>
+            </li>
+            <li><span class=label>* State:</span>
+              <input name="profile[mail_state]" maxlength="100" id="mstate" size="25" type="text" value="<%= @profile.mail_state if @profile!=nil %>">
+              <%= has_error @profile, :mail_state %>
+            </li>
+            <li><span class=label>* Zip Code:</span>
+              <input name="profile[mail_zip_code]" maxlength="100" id="mzip" size="25" type="text" value="<%= @profile.mail_zip_code if @profile!=nil %>">
+              <%= has_error @profile, :mail_zip_code %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+<% end %>
+
+
+<div class="content_div">
+  <div class="contright_title">Permanent Address</div>
+  <div class="contright_cont">
+    <input id="sameMail" onclick="copyMail();" type="checkbox" name="sameMail"/>
+    Check here if your permanent address is the same as your mailing address.
+    <div class="userInfo">
+      <ul>
+        <li><span class=label>* Street:</span>
+          <input name="profile[permant_street]" maxlength="100" id="pstreet" size="25" type="text" value="<%= @profile.permant_street if @profile!=nil %>">
+          <%= has_error @profile, :permant_street %>
+        </li>
+        <li><span class=label>* City/Province:</span>
+          <input name="profile[permant_city]" maxlength="100" id="pcity" size="25" type="text" value="<%= @profile.permant_city if @profile!=nil %>">
+          <%= has_error @profile, :permant_city %>
+        </li>
+        <li><span class=label>* State/Region:</span>
+          <input name="profile[permant_state]" maxlength="100" id="pstate" size="25" type="text" value="<%= @profile.permant_state if @profile!=nil %>">
+          <%= has_error @profile, :permant_state %>
+        </li>
+        <li><span class=label>* Country:</span>
+          <select name="profile[permant_country]" id="pcountry">
+            <% @country.each do |temp| %>
+                <% if @profile !=nil && @profile.permant_country == temp[:country_code] %>
+                    <%= "<option value=\""+temp[:country_code]+"\" selected=\"selected\">"+temp[:country_name]+"</option>" %>
+                <% else %>
+                    <% if temp[:country_code] =="US" && @profile.user_type==1 %>
+                        <%= "<option value=\""+temp[:country_code]+"\" selected=\"selected\">"+temp[:country_name]+"</option>" %>
+                    <% else %>
+                        <%= "<option value=\""+temp[:country_code]+"\" >"+temp[:country_name]+"</option>" %>
+                    <% end %>
+                <% end %>
+            <% end %>
+          </select>
+          <%= has_error @profile, :permant_country %>
+        </li>
+        <li><span class=label>* Regional Code:</span>
+          <input name="profile[permant_regional_code]" maxlength="100" id="pzip" size="25" type="text" value="<%= @profile.permant_regional_code if @profile!=nil %>">
+          <%= has_error @profile, :permant_regional_code %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="content_div">
+  <div class="contright_title">Phones</div>
+  <div class="contright_cont">
+    <div class="userInfo">
+      <ul>
+        <li><span class=label style="padding-left:260px;">Primary/Preferred</span><br>
+        </li>
+        <li><span class=label>Home Phone<% if @profile!=nil && @profile.user_type==0 %>(Number Only)<%end%>:</span>
+          <input name="profile[home_phone]" id="home" maxlength="60" size="25" type="text"
+                 <% if @profile!=nil && @profile.user_type==1 %>onkeypress="writePhone(event,'home');"
+                 <% end %> value="<%= @profile.home_phone if @profile!=nil %>">
+          <span class='mark' style="display:none" id="hint_home">!</span>
+          <%= has_error @profile, :home_phone %>
+          <input type="radio" id="r_home" name="profile[primary]" value="1"
+                 <% if @profile!=nil && @profile.primary==1 %>checked="checked"
+                 <% end %>>
+          <span class='mark' style="display:none" id="check">!</span>
+        </li>
+        <li><span class=label>Cell/Mobile Phone<% if @profile!=nil && @profile.user_type==0 %>(Number Only)<%end%>:</span>
+          <input name="profile[mobile_phone]" id="mobile" maxlength="60" size="25" type="text"
+                 <% if @profile!=nil && @profile.user_type==1 %>onkeypress="writePhone(event,'mobile');"
+                 <% end %>      value="<%= @profile.mobile_phone if @profile!=nil %>">
+          <span class='mark' style="display:none" id="hint_mobile">!</span>
+          <%= has_error @profile, :mobile_phone %>
+          <input type="radio" id="r_mobile" name="profile[primary]" value="2"
+                 <% if @profile!=nil && @profile.primary==2 %>checked="checked"
+                 <% end %>>
+        </li>
+        <li><span class=label> Work Phone<% if @profile!=nil && @profile.user_type==0 %>(Number Only)<%end%>:</span>
+          <input name="profile[work_phone]" id="work" maxlength="60" size="25" type="text"
+                 <% if @profile!=nil && @profile.user_type==1 %>onkeypress="writePhone(event,'work');"
+                 <% end %>      value="<%= @profile.work_phone if @profile!=nil %>">
+          <span class='mark' style="display:none" id="hint_work">!</span>
+          <%= has_error @profile, :work_phone %>
+          <input type="radio" id="r_work" name="profile[primary]" value="3"
+                 <% if @profile!=nil && @profile.primary==3 %>checked="checked"
+                 <% end %>>
+        </li>
+      </ul>
+    </div>
+    <ul id="spanPhone"><%= has_error @profile, :primary%>&nbsp;&nbsp;<span id="least">* At least one phone number is required. <b>Please
+      include country and city code.</b></span>
+    </ul>
+  </div>
+</div>
+
+
+<% if @profile!=nil && @profile.user_type==0 %>
+    <div class="content_div">
+      <div class="contright_title">Personal Information</div>
+      <div class="contright_cont">
+        <div class="userInfo">
+          <ul>
+            <li><span class=label>* Date of Birth(DD/MM/YYYY):</span>
+              <input name="profile[birth_date]" maxlength="10" size="25" type="text" value="<%= @profile.birth_date if @profile!=nil %>">
+              <%= has_error @profile, :birth_date %>
+            </li>
+            <li><span class=label>* Country of Birth:</span>
+              <input name="profile[birth_country]" maxlength="100" size="25" type="text" value="<%= @profile.birth_country if @profile!=nil %>">
+              <%= has_error @profile, :birth_country %>
+            </li>
+            <li><span class=label>* Country of Citizenship:</span>
+              <input name="profile[citizenship]" maxlength="100" size="25" type="text" value="<%= @profile.citizenship if @profile!=nil %>">
+              <%= has_error @profile, :citizenship %>
+            </li>
+            <li><span class=label3> If you currently reside in the U.S. on <br> a non-immigrant visa,
+                                      list visa type and expiration date listed on your I-94 card:</span>
+              <input name="profile[visa_type]" size="25" type="radio" value="1"
+                     <% if @profile!=nil && @profile.visa_type==1 %>checked="checked"
+                     <% end %> onclick="changeVisa();">F1
+              <input name="profile[visa_type]" size="25" type="radio" value="2"
+                     <% if @profile!=nil && @profile.visa_type==2 %>checked="checked"
+                     <% end %> onclick="changeVisa();">F2<br>
+              <input name="profile[visa_type]" size="25" type="radio" value="3"
+                     <% if @profile!=nil && @profile.visa_type==3 %>checked="checked"
+                     <% end %> onclick="changeVisa();">J1
+              <input name="profile[visa_type]" size="25" type="radio" value="4"
+                     <% if @profile!=nil && @profile.visa_type==4 %>checked="checked"
+                     <% end %> onclick="changeVisa();">J2<br>
+              <input name="profile[visa_type]" id="visaOther" size="25" type="radio" value="5"
+                     <% if @profile!=nil && @profile.visa_type==5 %>checked="checked"
+                     <% end %> onclick="changeVisa();">Other
+                     <span id="visa_other_hide"
+                           <% if @profile!=nil && @profile.visa_type!=5 %>style="display:none"
+              <% end %>><input name="profile[visa_type_other]" maxlength="20" size="9" type="text" value="<%= @profile.visa_type_other if @profile!=nil %>"/></span><br>
+            <li>
+              <div id="visaDiv"
+                   <% if @profile!=nil && @profile.visa_type==5 || @profile.visa_type==nil || @profile.visa_type=="" %>style="display:none"
+                   <% end %>>
+                <span class=label>I-94  Card Number:</span>
+                <input name="profile[card_number]" maxlength="16" type="text" value="<%= @profile.card_number if @profile!=nil %>">
+                <br/><br/>
+                <span class=label>Date(DD/MM/YYYY):</span>
+                <input name="profile[visa_date]" maxlength="10" type="text" value="<%= @profile.visa_date if @profile!=nil %>"><br>
+              </div>
+            </li>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+<% end %>
+
+<% if @profile!=nil && @profile.user_type==1 %>
+    <div class="content_div">
+      <div class="contright_title">Personal Information</div>
+      <div class="contright_cont">
+        <div class="userInfo">
+          <ul>
+            <li><span class=label>* Social Security Number:</span>
+              <input name="profile[social_security_number]" id="social_security_number" onkeypress="writeSSNum(event);" maxlength="100" size="25" type="text" value="<%= @profile.social_security_number if @profile!=nil %>"><span id="hint_social" class="mark"></span>
+              <%= has_error @profile, :social_security_number %>
+            </li>
+            <li><span class=label>* Date of Birth(DD/MM/YYYY):</span>
+              <input name="profile[birth_date]" maxlength="10" size="25" type="text" value="<%= @profile.birth_date if @profile!=nil %>">
+              <%= has_error @profile, :birth_date %>
+            </li>
+            <li><span class=label>* U.S. Military Veteran?</span>
+              <input name="profile[us_military_veteran]" size="" value="1" type="radio"
+                     <% if @profile!=nil && @profile.us_military_veteran==1 %>checked="checked"
+                     <% end %>>Yes
+              <input name="profile[us_military_veteran]" size="" value="2" type="radio"
+                     <% if @profile!=nil && @profile.us_military_veteran==2 %>checked="checked"
+                     <% end %>>No
+              <%= has_error @profile, :us_military_veteran %>
+            </li>
+            <li>
+              <span class="label">Are you a U.S.citizen?</span>
+              <input name="profile[citizenship]" id="us" size="" value="us" type="radio" onclick="changeCC();"
+                     <% if @profile!=nil && @profile.citizenship=="us" %>checked="checked"
+                     <% end %>>Yes
+              <input name="profile[citizenship]" id="other" size="" value="other" type="radio" onclick="changeCC();"
+                     <% if @profile!=nil && @profile.citizenship=="other" %>checked="checked"
+                     <% end %>>No
+            </li>
+            <li>
+              <div id="bodyCC" style="display:none;">
+                <span style="font-weight:bold;padding-left:80px"> Are you a Resident Alien of the U.S.?</span> <br/>
+                <input name="profile[us_citizen]" id="r_alien_yes" maxlength="100" type="radio" value="1" onclick="alien()"
+                       <% if @profile!=nil && @profile.us_citizen==1 %>checked="checked"
+                       <% end %>>Yes<span style="padding-left:25px"></span>(Fax a photocopy of the front and back of
+                your Resident
+                Alien Card to<br> <span style="padding-left:75px"></span>(408) 608-0318) <br/>
+
+                <div style="display:none;" id="alien_yes">
+                  <span style="padding-left:75px"></span>Date your Resident Alien card was
+                  issued<br/>
+                  <span style="padding-left:75px"></span>(DD/MM/YYYY):<input id="us_resident_alien" name="profile[us_resident_alien]" maxlength="10" size="" type="text" value="<%= @profile.us_resident_alien if @profile!=nil %>">
+                  <span id="hint_2" class="mark"></span>
+                  <%= has_error @profile, :us_resident_alien %>
+                  <br/>
+                  <span style="padding-left:75px"></span>Card
+                  Number:&nbsp;&nbsp;&nbsp;<input name="profile[card_number]" id="card_number" maxlength="100" size="" type="text" value="<%= @profile.card_number if @profile!=nil %>">
+                  <span id="hint_3" class="mark"></span>
+                  <%= has_error @profile, :card_number %>
+                  <br/>
+                </div>
+                <input name="profile[us_citizen]" id="r_alien_no" type="radio" value="0" onclick="alien()"
+                       <% if @profile!=nil && @profile.us_citizen==0 %>checked="checked"
+                       <% end %>>No &nbsp;&nbsp;&nbsp;
+                <div style="display:none;" id="alien_no">
+                  <input name="profile[citizenship_type]" type="radio" value="0"
+                         <% if @profile!=nil && @profile.citizenship_type==0 %>checked="checked"
+                         <% end %>>Decision Pending
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+<% end %>
+
+<div class="content_div">
+  <div class="contright_title">Optional Info</div>
+  <div class="contright_cont">
+    <div class="userInfo">
+      <ul>
+        <li><span class=label> Gender:</span>
+          <input name="profile[gender]" maxlength="100" size="" type="radio" value="1"
+                 <% if @profile!=nil && @profile.gender==1 %>checked="checked"
+                 <% end %>>Male &nbsp;&nbsp;&nbsp;
+          <input name="profile[gender]" maxlength="100" size="" type="radio" value="2"
+                 <% if @profile!=nil && @profile.gender==2 %>checked="checked"
+                 <% end %>>Female
+        </li>
+        <li><span class=label>Marital Status:</span>
+          <input name="profile[marital]" maxlength="100" size="" type="radio" value="1"
+                 <% if @profile!=nil && @profile.marital==1 %>checked="checked"
+                 <% end %>>Married
+          <input name="profile[marital]" maxlength="100" size="" type="radio" value="2"
+                 <% if @profile!=nil && @profile.marital==2 %>checked="checked"
+                 <% end %>>Single
+        </li>
+        <% if @profile!=nil && @profile.user_type==1 %>
+            <li><span class=label style="height:100px;">Ethnic Origin:</span>
+              <input name="profile[ethnic]" type="radio" value="1"
+                     <% if @profile!=nil && @profile.ethnic==1 %>checked="checked"
+                     <% end %>>American Indian or Alaskan Native<br>
+              <input name="profile[ethnic]" type="radio" value="2"
+                     <% if @profile!=nil && @profile.ethnic==2 %>checked="checked"
+                     <% end %>>Asian American or Pacific Islander<br>
+              <input name="profile[ethnic]" type="radio" value="3"
+                     <% if @profile!=nil && @profile.ethnic==3 %>checked="checked"
+                     <% end %>>African American
+              <input name="profile[ethnic]" type="radio" value="4"
+                     <% if @profile!=nil && @profile.ethnic==4 %>checked="checked"
+                     <% end %>>Caucasian<br>
+              <input name="profile[ethnic]" type="radio" value="5"
+                     <% if @profile!=nil && @profile.ethnic==5 %>checked="checked"
+                     <% end %>>Hispanic/Latino &nbsp;
+              <input name="profile[ethnic]" type="radio" value="6"
+                     <% if @profile!=nil && @profile.ethnic==6 %>checked="checked"
+                     <% end %>>Multi-racial<br>
+              <input name="profile[ethnic]" type="radio" value="7"
+                     <% if @profile!=nil && @profile.ethnic==7 %>checked="checked"
+                     <% end %>>Other<br>
+            </li>
+        <% end %>
+
+        <li><span class=label> Religious Preference:</span>
+          <input name="profile[religious]" maxlength="100" size="" type="text" value="<%= @profile.religious if @profile!=nil %>">
+        </li>
+      </ul>
+    </div>
+    <br>
+
+    <div align="right">
+      <% if @profile!=nil && @profile.user_type==1 %>
+          <input id="checkHomePhone" value="1" type="hidden">
+      <% else %>
+          <input id="checkHomePhone" value="0" type="hidden">
+      <% end %>
+      <a href="javascript:submitPersonal();"><img src="/images/hc/SaveandNext.gif" border="0"/></a>
+    </div>
+
+  </div>
+</div>
+</div>
+<div class="main_bottom"></div>
+</form>
+<script>
+    function alien() {
+        if (document.getElementById("r_alien_yes").checked) {
+            document.getElementById("alien_yes").style.display = "block";
+            document.getElementById("alien_no").style.display = "none";
+        } else if (document.getElementById("r_alien_no").checked) {
+            document.getElementById("alien_yes").style.display = "none";
+            document.getElementById("alien_no").style.display = "block";
+        }
+    }
+    function changeVisa() {
+        if ($("visaOther").checked) {
+            $("visaDiv").style.display = "none";
+            $("visa_other_hide").style.display = "";
+        } else {
+            $("visaDiv").style.display = "";
+            $("visa_other_hide").style.display = "none";
+        }
+    }
+
+    function writePhone(e, obj) {
+        if (window.event)
+        {
+            var keynum = e.keyCode
+            if ((keynum >= 48 ) && (keynum <= 57)) {
+                if ($(obj).value.length == 3) {
+                    $(obj).value = $(obj).value + "-";
+                }
+                if ($(obj).value.length == 7) {
+                    $(obj).value = $(obj).value + "-";
+                }
+                if ($(obj).value.length >= 12) {
+                    $(obj).value = $(obj).value.substr(0, 11);
+                }
+            } else {
+                window.event.keyCode = 0;
+            }
+        }
+        else if (e.which)
+        {
+            var keynum = e.which
+            if ((keynum >= 48 ) && (keynum <= 57)) {
+                if ($(obj).value.length == 3) {
+                    $(obj).value = $(obj).value + "-";
+                }
+                if ($(obj).value.length == 7) {
+                    $(obj).value = $(obj).value + "-";
+                }
+                if ($(obj).value.length >= 12) {
+                    $(obj).value = $(obj).value.substr(0, 11);
+                }
+            } else {
+                if (keynum != 8) {
+                    e.preventDefault();
+                }
+            }
+        }
+    }
+
+    function writeSSNum(e) {
+        var ssNum
+        if (window.event)
+        {
+            ssNum = e.keyCode
+            if ((ssNum >= 48 ) && (ssNum <= 57)) {
+                if ($("social_security_number").value.length == 3) {
+                    $("social_security_number").value = $("social_security_number").value + "-";
+                }
+                if ($("social_security_number").value.length == 6) {
+                    $("social_security_number").value = $("social_security_number").value + "-";
+                }
+                if ($("social_security_number").value.length >= 11) {
+                    $("social_security_number").value = $("social_security_number").value.substr(0, 10);
+                }
+            } else {
+                window.event.keyCode = 0;
+            }
+        }
+        else if (e.which)
+        {
+            ssNum = e.which
+            if ((ssNum >= 48 ) && (ssNum <= 57)) {
+                if ($("social_security_number").value.length == 3) {
+                    $("social_security_number").value = $("social_security_number").value + "-";
+                }
+                if ($("social_security_number").value.length == 6) {
+                    $("social_security_number").value = $("social_security_number").value + "-";
+                }
+                if ($("social_security_number").value.length >= 11) {
+                    $("social_security_number").value = $("social_security_number").value.substr(0, 10);
+                }
+            } else {
+                if (ssNum != 8) {
+                    e.preventDefault();
+                }
+            }
+        }
+    }
+
+    function displayDiv() {
+        var cw = document.getElementsByName("cw");
+        for (var i = 0; i < cw.length; i++) {
+            if (i > 0) {
+                cw[i].innerHTML = "";
+                cw[i].style.display = "none";
+            }
+        }
+    }
+</script>
+</body>

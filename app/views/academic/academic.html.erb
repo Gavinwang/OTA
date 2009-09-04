@@ -1,0 +1,277 @@
+<body onload="divStyle();">
+<form name="academicForm" action="/academic/create" method="post">
+<div class="main_right">
+<span style="color: Red; display:none;" id="hint_transcript">* Some required information is missing or incomplete. Please check your entries and try again.</span>
+<%= errors_for @academic_1, [:institution, :city, :state, :academic_record] %>
+<%= errors_for @academic_2, [:institution, :city, :state, :academic_record] %>
+<%= errors_for @academic_3, [:institution, :city, :state, :academic_record] %>
+
+<div class="content_div">
+  <div class="contright_title">Academic Background</div>
+
+
+  <div class="contright_cont">
+    Please identify the high school/college/universities attended with the most recent first. If you were home schooled
+    or are in receipt of a GED, please identify the certificate granting information.
+    <div class="userInfo">
+      <ul>
+        <li><span class=label>* Institution</span>
+          <input name="academic_1[institution]" maxlength="100" size="25" type="text" value="<%= @academic_1.institution if @academic_1!=nil %>"><%= has_error @academic_1, :institution %>
+        </li>
+        <li><span class=label>* City</span>
+          <input name="academic_1[city]" maxlength="100" size="25" type="text" value="<%= @academic_1.city if @academic_1!=nil %>"><%= has_error @academic_1, :city %>
+        </li>
+        <li><span class=label>* State</span>
+          <input name="academic_1[state]"  maxlength="100" size="25" type="text" value="<%= @academic_1.state if @academic_1!=nil %>"><%= has_error @academic_1, :state %>
+        </li>
+
+        <% if @profile != nil && @profile.user_type ==0 %>
+            <li><span class=label>* Country</span>
+              <select name="academic_1[country]" onChange="ToggleAddressFields(this)">
+                <% @country.each do |temp| %>
+                    <% if @academic_1!=nil && @academic_1.country == temp[:country_code] %>
+                        <%= "<option value=\""+temp[:country_code]+"\" selected=\"selected\">"+temp[:country_name]+"</option>" %>
+                    <% else %>
+                        <%= "<option value=\""+temp[:country_code]+"\" >"+temp[:country_name]+"</option>" %>
+                    <% end %>
+                <% end %>
+              </select>
+            </li>
+        <% end %>
+
+        <li><span class=label>Degrees/Major</span>
+          <input name="academic_1[degrees]" maxlength="100" size="25" type="text" value="<%= @academic_1.degrees if @academic_1!=nil %>">
+        </li>
+        <li><span class=label>Dates Attended(MM/YYYY)</span>
+          <input id="academic_1[attend_date_start]" name="academic_1[attend_date_start]" maxlength="7" size="12" type="text" value="<%= @academic_1.attend_date_start if @academic_1!=nil %>">
+          &nbsp; To
+          <input id="academic_1[attend_date_end]" name="academic_1[attend_date_end]" maxlength="7" size="12" type="text" value="<%= @academic_1.attend_date_end if @academic_1!=nil %>">
+          <span id="hint_1" class="mark"></span>
+        </li>
+        <li><span class=label>Completed</span>
+          <input name="academic_1[complete]" type="radio" value="1" <%= "checked=\"checked\"" if @academic_1!=nil && @academic_1.complete==1 %> />
+        </li>
+        <li><span class=label>In Progress</span>
+          <input name="academic_1[complete]" type="radio" value="0" <%= "checked=\"checked\"" if @academic_1!=nil && @academic_1.complete==0 %> />
+        </li>
+        <% if @profile != nil && @profile.user_type ==1 %>
+            <li><span class=label>*Name on Academic Record</span>
+              <input name="academic_1[academic_record]"  maxlength="100" size="25" type="text" value="<%= @academic_1.academic_record if @academic_1!=nil %>"/>
+              <%= has_error @academic_1, :academic_record %>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+    <a href="javascript:display()">Add Another College/University/Institution</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </div>
+
+  <div class="contright_cont" id="another_1" style="display:none;<% if @academic_2 !=nil%>display:block;
+    <% end %>">
+    <input type="hidden" id="div2" name="div2" value="false">
+    <hr size="1" color="#A9B5C6"/>
+    Please identify the high school/college/universities attended with the most recent first. If you were home schooled
+    or are in receipt of a GED, please identify the certificate granting information.
+    <div class="userInfo">
+      <ul>
+        <li><span class=label>* Institution</span>
+          <input name="academic_2[institution]" maxlength="100" id="a2I" size="25" type="text" value="<%= @academic_2.institution if @academic_2!=nil %>"><%= has_error @academic_2, :institution %>
+        </li>
+        <li><span class=label>* City</span>
+          <input name="academic_2[city]" maxlength="100" size="25" type="text" value="<%= @academic_2.city if @academic_2!=nil %>"><%= has_error @academic_2, :city %>
+        </li>
+        <li><span class=label>* State</span>
+          <input name="academic_2[state]" maxlength="100" size="25" type="text" value="<%= @academic_2.state if @academic_2!=nil %>"><%= has_error @academic_2, :state %>
+        </li>
+
+        <% if @profile != nil && @profile.user_type ==0 %>
+            <li><span class=label>* Country</span>
+              <select name="academic_2[country]" onChange="ToggleAddressFields(this)">
+                <% @country.each do |temp| %>
+                    <% if @academic_2!=nil && @academic_2.country == temp[:country_code] %>
+                        <%= "<option value=\""+temp[:country_code]+"\" selected=\"selected\">"+temp[:country_name]+"</option>" %>
+                    <% else %>
+                        <%= "<option value=\""+temp[:country_code]+"\" >"+temp[:country_name]+"</option>" %>
+                    <% end %>
+                <% end %>
+              </select>
+            </li>
+        <% end %>
+
+        <li><span class=label>Degrees/Major</span>
+          <input name="academic_2[degrees]" maxlength="100" size="25" type="text" value="<%= @academic_2.degrees if @academic_2!=nil %>">
+        </li>
+        <li><span class=label>Dates Attended(MM/YYYY)</span>
+          <input id="academic_2[attend_date_start]" name="academic_2[attend_date_start]"  maxlength="7" size="12" type="text" value="<%= @academic_2.attend_date_start if @academic_2!=nil %>">
+          &nbsp;To
+          <input id="academic_2[attend_date_end]" name="academic_2[attend_date_end]"  maxlength="7" size="12" type="text" value="<%= @academic_2.attend_date_end if @academic_2!=nil %>">
+          <span id="hint_2" class="mark"></span>
+        </li>
+        <li><span class=label>Completed</span>
+          <input name="academic_2[complete]" type="radio" value="1" <%= "checked=\"checked\"" if @academic_2!=nil && @academic_2.complete==1 %> />
+        </li>
+        <li><span class=label>In Progress</span>
+          <input name="academic_2[complete]" type="radio" value="0" <%= "checked=\"checked\"" if @academic_2!=nil && @academic_2.complete==0 %> />
+        </li>
+        <% if @profile != nil && @profile.user_type ==1 %>
+            <li><span class=label>*Name on Academic Record</span>
+              <input name="academic_2[academic_record]"  maxlength="100" size="25" type="text" value="<%= @academic_2.academic_record if @academic_2!=nil %>"/>
+              <%= has_error @academic_2, :academic_record %>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+    <a href="javascript:remove('another_1','div2')">Remove College/University/Institution</a><br/>
+  </div>
+
+
+  <div class="contright_cont" id="another_2" style="display:none;<% if @academic_3 !=nil%>display:block;
+    <% end %>">
+    <input type="hidden" id="div3" name="div3" value="false">
+    <hr size="1" color="#A9B5C6"/>
+    Please identify the high school/college/universities attended with the most recent first. If you were home schooled
+    or are in receipt of a GED, please identify the certificate granting information.
+    <div class="userInfo">
+      <ul>
+        <li><span class=label>* Institution</span>
+          <input name="academic_3[institution]" maxlength="100" id="a3I" size="25" type="text" value="<%= @academic_3.institution if @academic_3!=nil %>"><%= has_error @academic_3, :institution %>
+        </li>
+        <li><span class=label>* City</span>
+          <input name="academic_3[city]" maxlength="100" size="25" type="text" value="<%= @academic_3.city if @academic_3!=nil %>"><%= has_error @academic_3, :city %>
+        </li>
+        <li><span class=label>* State</span>
+          <input name="academic_3[state]" maxlength="100" size="25" type="text" value="<%= @academic_3.state if @academic_3!=nil %>"> <%= has_error @academic_3, :state %>
+        </li>
+
+        <% if @profile != nil && @profile.user_type ==0 %>
+            <li><span class=label>* Country</span>
+              <select name="academic_3[country]" onChange="ToggleAddressFields(this)">
+                <% @country.each do |temp| %>
+                    <% if @academic_3!=nil && @academic_3.country == temp[:country_code] %>
+                        <%= "<option value=\""+temp[:country_code]+"\" selected=\"selected\">"+temp[:country_name]+"</option>" %>
+                    <% else %>
+                        <%= "<option value=\""+temp[:country_code]+"\" >"+temp[:country_name]+"</option>" %>
+                    <% end %>
+                <% end %>
+              </select>
+            </li>
+        <% end %>
+
+        <li><span class=label>Degrees/Major</span>
+          <input name="academic_3[degrees]" maxlength="100" size="25" type="text" value="<%= @academic_3.degrees if @academic_3!=nil %>">
+        </li>
+        <li><span class=label>Dates Attended(MM/YYYY)</span>
+          <input id="academic_3[attend_date_start]" name="academic_3[attend_date_start]" maxlength="7" size="12" type="text" value="<%= @academic_3.attend_date_start if @academic_3!=nil %>">
+          &nbsp;To
+          <input id="academic_3[attend_date_end]" name="academic_3[attend_date_end]" maxlength="7" size="12" type="text" value="<%= @academic_3.attend_date_end if @academic_3!=nil %>">
+          <span id="hint_3" class="mark"></span>
+        </li>
+        <li><span class=label>Completed</span>
+          <input name="academic_3[complete]" type="radio" value="1" <%= "checked=\"checked\"" if @academic_3!=nil && @academic_3.complete==1 %> />
+        </li>
+        <li><span class=label>In Progress</span>
+          <input name="academic_3[complete]" type="radio" value="0" <%= "checked=\"checked\"" if @academic_3!=nil && @academic_3.complete==0 %> />
+        </li>
+        <% if @profile != nil && @profile.user_type ==1 %>
+            <li><span class=label>*Name on Academic Record</span>
+              <input name="academic_3[academic_record]" maxlength="100" size="25" type="text" value="<%= @academic_3.academic_record if @academic_3!=nil %>"/>
+              <%= has_error @academic_3, :academic_record %>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+    <a href="javascript:remove('another_2','div3')">Remove College/University/Institution</a><br/>
+    <br/>
+  </div>
+
+
+</div>
+<% if session[:isdom] == false %>
+    <div class="content_div" id="transcript">
+      <div class="contright_title">Transcript</div>
+      <div class="contright_cont" id="spanTranript" style="display:none"><span><ul style="color:#ff0000">You should
+        choose at least one option.
+      </ul></span></div>
+      <div class="contright_cont">* Concordia will request your official transcripts from the schools where you received
+        your baccalaureate degree on your behalf. This is available only to US residents for US colleges and
+        Universities.
+        <div class="userInfo">
+          <ul>
+            <li>
+              <input name="complete_bottom" id="complete_bottom" type="radio" value="1" onClick="selectTR(this)" <%= "checked=\"checked\"" if @transcript!=nil && @transcript.complete_bottom ==1 %>>Yes,
+              I plan on having Concordia request my transcript(s) by submitting a Transcript Release Form.
+            </li>
+            <li>
+              <input name="complete_bottom" id="complete_bottom1" type="radio" value="0" onClick="selectTR(this)" <%= "checked=\"checked\"" if @transcript!=nil && @transcript.complete_bottom ==0 %>>No,
+              I will request mt own transcripts and have them sent to Concordia.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="content_div" id="trdiv" style="display:none;">
+      <div class="contright_title">Transcript release</div>
+      <div class="contright_cont">For your convenience, and on your behalf, Concordia University will pay for, and
+        process the request for your official transcripts for your application to Concordia University.<br>
+        <br>
+        Please note: If you are currently completing coursework for this quarter or semester, we will request a
+        transcript from your current school that lists your coursework to date. However, any coursework completed after
+        you are advised of an admission decision needs to be submitted. It becomes your responsibility to request the
+        additional transcripts that will be needed to complete your file. We will require this information to determine
+        your eligibility for admission and any financial aid you may be eligible to receive.<br>
+        <br>
+        By electronically signing this form and pursuant to provisions of the Federal Family Educational Rights and
+        Privacy Act of 1974, (Public Law 93-380), I grant permission for the release of my academic record to Concordia
+        University, but only on the condition that Concordia University will not permit any other party to have access
+        to this record.
+        <div class="userInfo">
+          <ul>
+            <li><span class=label>*Date(DD/MM/YYYY):</span>
+              <input name="date" id="date" size="25" maxlength="10" type="text" value="<%= @transcript.date if @transcript!=nil %>"/><span id="hint" class="mark"></span>
+            </li>
+            <li><span class=label>*Signature(Type in Name):</span>
+              <input name="signature" id="signature" maxlength="100" size="25" type="text" value="<%= @transcript.signature if @transcript!=nil %>"/><span id="hint_signature" class="mark"></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+<% end %>
+<a href="#" onclick="academicSubmit();" style=" float:right"><img src="/images/hc/SaveandNext.gif" style="border-style: none; border-width: 0px;"></a>
+</div>
+<div class="main_bottom"></div>
+</form>
+<script type="text/javascript">
+    function divStyle() {
+        if (document.getElementById("another_1").style.display == "block")
+        {
+            document.getElementById("div2").value = "true";
+        }
+        if (document.getElementById("another_2").style.display == "block")
+        {
+            document.getElementById("div3").value = "true";
+        }
+        if (document.getElementById("complete_bottom").checked) {
+            document.getElementById("trdiv").style.display = "";
+        }
+    }
+    //academic page Add Another College/University/Institution display  none or block
+    function display() {
+        if(document.getElementById("another_1").style.display == "block"){
+            if(document.getElementById("another_2").style.display == "block"){
+
+            }else{
+                document.getElementById("another_2").style.display = "block"
+                document.getElementById("div3").value = "true";
+            }
+        }else{
+            document.getElementById("another_1").style.display = "block"
+            document.getElementById("div2").value = "true";
+        }
+    }
+
+    function remove(a,d){
+        document.getElementById(a).style.display = "none";
+        document.getElementById(d).value = "false";
+    }
+</script>
+</body>

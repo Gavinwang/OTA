@@ -1,0 +1,44 @@
+  <body>
+  <div class="main">
+    <form name="degreeForm" action="/degree/create" method="post">
+    <div class="main_right_success"></div>
+
+    <div class="content_div_success">
+
+      <div class="content_index_left" align="center">
+        Congratulations! You have successfully created your Concordia University online profile. To continue to the admission application , click Start below.
+<br>
+<br>
+        <div align="center"><a href="/profile/welcome"><img src="/images/hc/START.gif" border="0"/></a>&nbsp;&nbsp;&nbsp;&nbsp;
+          <a href="#" onclick="saveAndClose(1);" id="sub"><img src="/images/hc/LOGOUT.gif" border="0"/></a></div>
+      </div>
+    </div>
+
+    <div class="main_bottom_success"></div>
+    </form>
+  </div>
+  <div id="save_close" style="position:absolute;z-index:99999;display:none;">
+  <div style="width:400px;border: 2px solid #152758;padding: 15px; font-size:16px; font-weight:bold;background-color: #FAFAEB; cursor:pointer;">
+    All information entered will be saved to your profile.<br/>
+
+    <div align="center" style="padding-top:15px;">
+      <a href="javascript:window.location.href ='/profile/logout'"><img src="/images/hc/ok.gif" border="0"></a>&nbsp;&nbsp;
+      <a href="javascript:saveAndClose()"><img src="/images/hc/cancel.gif" border="0"></a>
+    </div>
+
+  </div>
+
+  </div>
+  </body>
+  <script>
+    function saveAndClose(temp) {
+        if (temp == 1) {
+            var pos = Position.cumulativeOffset($("sub"));
+            $("save_close").style.display = "block";
+            $("save_close").style.left = (pos[0] - 200) + "px";
+            $("save_close").style.top = (pos[1] - 20) + "px";
+        } else {
+            $("save_close").style.display = "none";
+        }
+    }
+</script>

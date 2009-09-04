@@ -1,0 +1,34 @@
+<body>
+<div class="main">
+  <form name="loginForm" action="/forgetpwd/retrievepwd" method="post">
+    <div style="overflow:auto;width:366px; margin:0 auto;">
+      <div class="content_div">
+        <span style="color:red;" id="hint_"><%= flash[:notice] %></span>
+        <div class="content_title" style="text-align:center">Retrieve Password</div>
+        <div class="content_cont_white">
+          <div class="userInfo">
+            <div align="center"><span style="color:red;" ><%= flash[:exist] %></span> </div>
+            <ul>
+              <li><span class=label style="font-size:12px; font-weight:bold">Email Address</span>
+                <input name="login_name" type="text" maxlength="100">
+              </li>
+            </ul>
+          </div>
+          <br/>
+          <a href="#" style="margin-left:160px;" onclick="submitLogin();"><img src="/images/hc/submit.gif" border="0"/></a><br/>
+          <br/>
+          <span class="font_bold" style="padding-left:50px">New Applicants:</span> click <a href="/profile">here</a> to
+          create a profile.<br/>
+          <br/>
+        </div>
+      </div>
+    </div>
+    <br/>
+
+    <div class="content_cont_white">
+      <span style="font-size:12px; font-weight:bold;display:block;text-align:center;">Problems logging in? Contact 1-877-251-4405 or
+        <a href="mailto:admissions@concordiaonline.net" class="help">admissions@concordiaonline.net</a></span>
+    </div>
+  </form>
+</div>
+</body>

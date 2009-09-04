@@ -1,0 +1,80 @@
+<script src="/javascripts/hc/PopupCalendar.js" type="text/javascript"></script>
+<body>
+<div class="main">
+
+  <div class="main_left" align="">
+    <div class="content_title" align="center">Applicant Search</div>
+    <div class="leftmenu_cont" style="padding-left:20px">
+      <form name="searchForm" action="/admin/search" method="post">
+        <br/>
+
+        Email:<input type="text" name="email" size="16" id="email" value="<%= @mail %>"/>
+
+        <br/><br/>
+        Start
+        Date:<br/><%= date_select :start_date, :s, :use_month_numbers => true, :order => [:year, :month, :day], :default => {:year => @year_s, :month => @month_s, :day => @day_s} %>
+        <span class="mark"><%= flash["hint_s"] %></span>
+        <br/><br/>
+        End
+        Date:<br/><%= date_select :end_date, :e, :use_month_numbers => true, :order => [:year, :month, :day], :default => {:year => @year_e, :month => @month_e, :day => @day_e} %>
+        <span class="mark"><%= flash["hint_e"] %></span>
+        <br/><br/>
+        <a href="javascript:searchSubmit()"><img src="/images/hc/submit.gif" border="0"></a>
+      </form>
+    </div>
+  </div>
+
+  <div class="main_right">
+    <table width="100%">
+      <tr style="font-weight:bold">
+        <td>Email</td>
+        <td>First Name</td>
+        <td>Last Name</td>
+        <td>DOM/INT</td>
+        <td>Profile</td>
+      </tr>
+      <% if @profiles != nil %>
+          <% if !@profiles.empty? %>
+              <% i =1 %>
+              <% @profiles.each do |pf| %>
+                  <tr <%= "bgcolor='#EFF5FF'" if i%2 != 0 %>>
+                    <td><%= pf.login_email %></td>
+                    <td><%= pf.con_name %></td>
+                    <td><%= pf.con_last_name %></td>
+                    <% if pf.user_type == 0 %>
+                        <td>INT</td>
+                        <td><a href="/pdf/createint?user_email=<%= pf.login_email %>">view</a></td>
+                    <% else %>
+                        <td>DOM</td>
+                        <td><a href="/pdf/createdom?user_email=<%= pf.login_email %>">view</a></td>
+                    <% end %>
+                    <!--    <a href="/admin/profileinfo?id=<%= pf.id %>">view</a> -->
+                  </tr>
+                  <% i+=1 %>
+              <% end %>
+
+          <% end %>
+      <% end %>
+    </table>
+    <br/>
+
+    <div align="center" >
+      <% if @prve == 1 %>
+          <a style="font-weight:bold" href="/admin/admin?flag=0&offset=<%= @page_offset %>&email=<%= @mail %>&start=<%= @ss %>&eend=<%= @ee %>">PREV</a>
+      <% end %>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <% if @next == 1 %>
+          <a style="font-weight:bold" href="/admin/admin?flag=1&offset=<%= @page_offset %>&email=<%= @mail %>&start=<%= @ss %>&eend=<%= @ee %>">NEXT</a>
+      <% end %>
+    </div>
+  </div>
+  <!--  <div class="main_bottom"><a href="/admin/count"><%= @count %></a> -->
+</div>
+</div>
+<script>
+    function searchSubmit() {
+        document.searchForm.submit();
+    }
+
+</script>
+</body>

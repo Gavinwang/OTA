@@ -1,0 +1,110 @@
+<html>
+<br>
+Form: <%= @url%>
+<br><br>
+
+Application Data:
+<br><br>
+
+Name: <%= @user.instructor_name %>
+<br> <br>
+
+E-mail: <%= @user.email %>
+<br> <br>
+
+Mailing Address: <%= @user.address %>
+<br> <br>
+
+Home Phone: <%= @user.home_phone %>
+<br> <br>
+
+Work Phone: <%= @user.work_phone %>
+<br> <br>
+
+Cell Phone: <%= @user.cell_phone %>
+<br> <br>
+
+Current employer: <%= @user.current_employer %>
+<br> <br>
+
+Church membership or denominational affiliation:<br><%= @user.membership %>
+<br> <br>
+
+When you are available to teach (check all that apply):
+<% if @user.fall==0 %>Fall&nbsp;&nbsp;
+<% end %>
+<% if @user.spring==0 %> Spring&nbsp;&nbsp;
+<% end %>
+<% if @user.summer==0 %>Summer&nbsp;&nbsp;
+<% end %>
+<br> <br>
+
+Please list those areas in which you are qualified to teach:<br><%= @user.teach_areas %>
+<br> <br>
+
+Current teaching and/or administrative responsibilities: <br><%= @user.current_teaching %>
+<br> <br>
+
+Educational background:<br><%= @user.edu_bg %>
+<br> <br>
+
+Honors received:<br><%= @user.honors %>
+<br> <br>
+
+Have you ever been convicted of a felony?
+<% if @user.convicted_felony==0 %>Yes
+    <% end %>
+<% if @user.convicted_felony==1 %>No
+<% end %>
+<br> <br>
+
+Highest degree attained: <%= @user.highest_degree %>
+<br> <br>
+
+Total years of experience in your profession: <%= @user.experience %>
+<br> <br>
+
+References - Please provide the names and contact information of three individuals who are familiar with your
+work.
+<br> <br>
+
+<table>
+  <tr>
+    <td>Name</td>
+    <td></td>
+    <td>Phone Number</td>
+    <td></td>
+    <td>Email Address</td>
+  </tr>
+  <% @indivduals.each do |temp| %>
+  <tr>
+    <td><%= temp.name %></td>
+    <td></td>
+    <td><%= temp.phone %></td>
+    <td></td>
+    <td><%= temp.email %></td>
+    <td></td>
+  </tr>
+  <% end %>
+</table>
+
+<br>
+
+Last four of SS#: <%= @user.last_four_ss %>
+<br> <br>
+
+Birth Date: <%= @user.birth_date %>
+<br> <br>
+
+Signature(Type in Name): <%= @user.signature %>
+<br> <br>
+
+Today's Date: <%= @user.todays_date %>
+<br> <br>
+
+Sincerely,<br>
+Online Instructor Team<br>
+Concordia University<br>
+1-877-251-4405<br>
+admissions@concordiaonline.net<br>
+</html>

@@ -1,0 +1,94 @@
+<body>
+<div class="main_right">
+  <form name="welcomeForm" action="/personal/personal" method="post">
+    <div class="content_div">
+      <div class="contright_title" id="divwel">Welcome</div>
+      <div class="contright_cont">
+        <br/>
+        Concordia opened its doors for the first time at its current location in 1905. The school began as a four-year
+        academy to meet the needs of the region for pastors and school teachers for the Lutheran Church-Missouri Synod.
+        The campus has evolved into a university that offers a solid liberal arts education, pre-professional programs,
+        professional church work programs, and undergraduate and graduate degrees in education and business. The campus'
+        1,500 students come from all over the United States and the world, but primarily from the Pacific Northwest.<br><br>
+        Concordia University is a Christian university preparing leaders for the transformation of society. Located on
+        13 acres in a residential neighborhood of Portland, Concordia's mission drives all planning in academics and
+        future directions. The campus builds on its strengths, pursuing programs that will assist students to prepare
+        for work or to enhance their pursuit of lifelong learning. Students, staff, and faculty-the Concordia
+        community-are valued as the most important components of this campus, as all strive to encourage, support, and
+        equip for service and fulfillment.
+        <br/>
+      </div>
+    </div>
+    <div class="content_div">
+
+      <div class="contright_cont"><span class="font_bold">Admission Requirements</span><br/>
+        <% if session[:isdom] == false %>
+            <ul>
+              <li type="square">Completed Concordia University graduate application form (must be completed online)
+              </li>
+              <br>
+              <li type="square">Proof of degree from an accredited institution via official transcripts (Bachelor's
+                and/or Master's). Concordia University will request transcripts on your behalf.
+              </li>
+              <br>
+              <li type="square">Two letters of recommendation</li>
+              <br>
+              <li type="square">A minimum 2.8 GPA for undergraduate coursework (3.0 GPA for any graduate coursework)
+              </li>
+              <br>
+            </ul>
+        <% else %>
+            <ul>
+              <li type="square">Completed Concordia University graduate application form (must be completed online)
+              </li>
+              <br>
+              <li type="square">Proof of a bachelor's and/or master's degree that is officially recognized by the
+                Ministry of Education. Transcripts must be evaluated by WES (www.wes.org) at the expense of the student.
+              </li>
+              <br>
+              <li type="square">Two letters of recommendation</li>
+              <br>
+              <li type="square"> A minimum 2.8 GPA for undergraduate coursework (3.0 GPA for any graduate coursework)
+              </li>
+              <br>
+              <li type="square"> A successful score of 80 or better on the IBT (Internet Based Test of the TOEFL) - or -
+                A successful score of a 550 or better with TWE of 5 or better.
+              </li>
+              <br>
+              <li type="square">Letter of Financial Guarantee, or attached form signed by bank.</li>
+              <br>
+              <li type="square">Current Resume of Educational and Work experience.</li>
+              <br>
+            </ul>
+        <% end %>
+
+
+        <br/>
+        <span class="font_bold">Submitting your Application</span><br><br>
+        You will have an opportunity to review your application before you submit to the university.
+
+        <br/> <br/><br/>
+
+        To apply to Concordia University, you are required to submit the following:
+        <ul>
+          <li type="square">Personal Information</li>
+          <li type="square">Academic Information</li>
+          <li type="square">Career Information</li>
+        </ul>
+        <br/>
+
+        <span class="font_bold">Please Note:</span> To return to a previous page within the application, please use the
+        navigation menu at the top left.
+        <br>
+        <br>
+
+        <div align="right">
+          <% if session[:issubmit]!=1 %>
+              <a href="#" onclick="submitWelcome();"><img src="/images/hc/START.gif" border="0"/></a>
+          <% end %></div>
+      </div>
+    </div>
+  </form>
+</div>
+      <div class="main_bottom"></div>
+</body>

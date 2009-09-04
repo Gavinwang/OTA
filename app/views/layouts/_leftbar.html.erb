@@ -1,0 +1,215 @@
+<div class="main_left">
+  <div class="content_div">
+    <div class="content_title">Applicant Menu</div>
+    <div class="leftmenu_cont">
+      <% if @titlelogo =="welcome" %>
+          <a class="leftmenu" href="/profile/welcome">
+            Instructions<img src="/images/hc/space.gif" align="absmiddle" style="border-width: 0px; height: 19px; width: 17px; padding-right:5px;">
+          </a>
+      <% else %>
+          <a class="leftmenu_h" href="/profile/welcome">
+            Instructions<img src="/images/hc/space.gif" align="absmiddle" style="border-width: 0px; height: 19px; width: 17px; padding-right:5px;">
+          </a>
+      <% end %>
+      <% if @titlelogo =="personal" %>
+          <a class="leftmenu" href="/personal/personal"
+             <% if session[:issubmit]==1 %>onclick="return false;"
+             <% end %> >Personal Information
+            <% if session[:p]==0 %>
+                <img src="/images/hc/box.gif" align="absmiddle" style="border-width: 0px; height: 19px; width: 17px; padding-right:5px;">
+            <% else %>
+                <img src="/images/hc/check.gif" align="absmiddle" style="border-width: 0px; height: 19px; width: 17px; padding-right:5px;">
+            <% end %>
+          </a>
+
+      <% else %>
+          <a class="leftmenu_h" href="/personal/personal"
+             <% if session[:issubmit]==1 %>onclick="return false;"
+             <% end %> >Personal Information
+            <% if session[:p]==0 %>
+                <img src="/images/hc/box.gif" align="absmiddle" style="border-width: 0px; height: 19px; width: 17px; padding-right:5px;">
+            <% else %>
+                <img src="/images/hc/check.gif" align="absmiddle" style="border-width: 0px; height: 19px; width: 17px; padding-right:5px;">
+            <% end %>
+          </a>
+      <% end %>
+      <% if @titlelogo =="academic" %>
+          <a class="leftmenu" href="/academic/academic"
+             <% if session[:issubmit]==1 %>onclick="return false;"
+             <% end %> >Academic Information
+            <% if session[:a]==0 %>
+                <img src="/images/hc/box.gif" align="absmiddle" style="border-width: 0px; height: 19px; width: 17px; padding-right:5px;">
+            <% else %>
+                <img src="/images/hc/check.gif" align="absmiddle" style="border-width: 0px; height: 19px; width: 17px; padding-right:5px;">
+            <% end %>
+          </a>
+
+      <% else %>
+          <a class="leftmenu_h" href="/academic/academic"
+             <% if session[:issubmit]==1 %>onclick="return false;"
+             <% end %> >Academic Information
+            <% if session[:a]==0 %>
+                <img src="/images/hc/box.gif" align="absmiddle" style="border-width: 0px; height: 19px; width: 17px; padding-right:5px;">
+            <% else %>
+                <img src="/images/hc/check.gif" align="absmiddle" style="border-width: 0px; height: 19px; width: 17px; padding-right:5px;">
+            <% end %>
+          </a>
+
+      <% end %>
+      <% if @titlelogo =="employment" %>
+          <a class="leftmenu" href="/careerinfo/careerinfo"
+             <% if session[:issubmit]==1 %>onclick="return false;"
+             <% end %> >Career Information
+            <% if session[:c]==0 %>
+                <img src="/images/hc/box.gif" align="absmiddle" style="border-width: 0px; height: 19px; width: 17px; padding-right:5px;">
+            <% else %>
+                <img src="/images/hc/check.gif" align="absmiddle" style="border-width: 0px; height: 19px; width: 17px; padding-right:5px;">
+            <% end %>
+          </a>
+
+      <% else %>
+          <a class="leftmenu_h" href="/careerinfo/careerinfo"
+             <% if session[:issubmit]==1 %>onclick="return false;"
+             <% end %> >Career Information
+            <% if session[:c]==0 %>
+                <img src="/images/hc/box.gif" align="absmiddle" style="border-width: 0px; height: 19px; width: 17px; padding-right:5px;">
+            <% else %>
+                <img src="/images/hc/check.gif" align="absmiddle" style="border-width: 0px; height: 19px; width: 17px; padding-right:5px;">
+            <% end %>
+          </a>
+
+      <% end %>
+
+      <% if @titlelogo =="reference" %>
+          <a class="leftmenu" href="/reference_info/reference_info"
+             <% if session[:issubmit]==1 %>onclick="return false;"
+             <% end %> >Upload and Download
+            <% if session[:r]==0 %>
+                <img src="/images/hc/box.gif" align="absmiddle" style="border-width: 0px; height: 19px; width: 17px; padding-right:5px;">
+            <% else %>
+                <img src="/images/hc/check.gif" align="absmiddle" style="border-width: 0px; height: 19px; width: 17px; padding-right:5px;">
+            <% end %>
+          </a>
+      <% else %>
+          <a class="leftmenu_h" href="/reference_info/reference_info"
+             <% if session[:issubmit]==1 %>onclick="return false;"
+             <% end %> >Upload and Download
+            <% if session[:r]==0 %>
+                <img src="/images/hc/box.gif" align="absmiddle" style="border-width: 0px; height: 19px; width: 17px; padding-right:5px;">
+            <% else %>
+                <img src="/images/hc/check.gif" align="absmiddle" style="border-width: 0px; height: 19px; width: 17px; padding-right:5px;">
+            <% end %>
+          </a>
+      <% end %>
+
+      <% if @titlelogo =="review" %>
+          <a class="leftmenu" href="/profile/review">Review and Submit
+            <% if session[:issubmit]!=1 %>
+                <img src="/images/hc/box.gif" align="absmiddle" style="border-width: 0px; height: 19px; width: 17px; padding-right:5px;">
+            <% else %>
+                <img src="/images/hc/check.gif" align="absmiddle" style="border-width: 0px; height: 19px; width: 17px; padding-right:5px;">
+            <% end %>
+          </a>
+      <% else %>
+          <a class="leftmenu_h" href="/profile/review">Review and Submit
+            <% if session[:issubmit]!=1 %>
+                <img src="/images/hc/box.gif" align="absmiddle" style="border-width: 0px; height: 19px; width: 17px; padding-right:5px;">
+            <% else %>
+                <img src="/images/hc/check.gif" align="absmiddle" style="border-width: 0px; height: 19px; width: 17px; padding-right:5px;">
+            <% end %>
+          </a>
+      <% end %>
+      <a class="leftmenu_h" href="javascript:saveAndClose(1)" style="">Save and Close
+      <img src="/images/hc/space.gif" align="absmiddle" style="border-width: 0px; height: 19px; width: 17px; padding-right:5px;">
+      </a>
+
+    </div>
+    <div class="content_title" id="sub">My Account</div>
+    <form name="changePasswordForm" action="/profile/changePassword" method="post">
+      <div class="content_cont">
+        <%= flash[:change_pass_notice] %>
+        <span id="spanChangeP" style="display:none;color:red">Passwords must be at least six characters.<br></span>
+        <a href="javascript:showChangePassword()">Change password?</a><br/>
+
+        <div id="newPassword" style="display:none">
+          <br/>
+          Password:
+          <input name="newPassword" maxlength="20" type="password" id="changePassword"/>
+          <br/>
+          <br/>
+          <a href="javascript:submitNewPassword()"><img src="/images/hc/submit.gif" border="0"/></a>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="content_div">
+    <div class="content_title">Need Help?</div>
+    <div class="content_cont">If you need help with your application, contact your Enrollment Advisor. <br/>
+      <br/>
+      <img src="/images/hc/email.gif" alt="" border="0" width="11" height="8"/>&nbsp;
+      <a href="mailto:admissions@concordiaonline.net?subject='I have some questions regarding my online application for the Concordia University'">Email
+        Your Request</a></div>
+  </div>
+  <div class="content_div">
+    <div class="content_title">Application Info</div>
+    <div class="content_cont">
+      <%= flash[:date_change_notice] %>
+      <span class="font_bold">Intended Start Date</span><br/>
+      <span><%= session[:startDate] %></span> <br/>
+      <br/>
+      <a href="javascript:changeProgramDisplay()">Change Program or Start Date</a>
+
+      <form name="changeProgramForm" action="/degree/changeStartDate" method="post">
+        <div id="changeProgram" style="display:none">
+          <br/>
+          <select name="start_date">
+            <% Constant::DEGREE_DATE.each do |temp| %>
+                <%= "<option value=\""+temp+"\">"+temp+"</option>" %>
+            <% end %>
+          </select>
+          <br/>
+          <br/>
+          <a href="javascript:changeProgramFormSubmit()"><img src="/images/hc/submit.gif" border="0"/></a>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="content_div">
+    <div class="content_title">Refer a Colleague</div>
+    <div class="content_cont">Do you know someone who would benefit from an advanced degree? <br/>
+      <br/>
+      <a href="http://www.concordiaonline.net?source=cu-application-referral" target="_blank">Refer a Friend!</a></div>
+  </div>
+</div>
+<div id="save_close" style="position:absolute;z-index:99999;display:none;">
+  <div style="width:400px;border: 2px solid #152758;padding: 15px; font-size:16px; font-weight:bold;background-color: #FAFAEB; cursor:pointer;">
+    All information entered will be saved to your profile.<br/>
+
+    <div align="center" style="padding-top:15px;">
+      <a href="javascript:window.location.href ='/profile/logout'"><img src="/images/hc/ok.gif" border="0"></a>&nbsp;&nbsp;
+      <a href="javascript:saveAndClose()"><img src="/images/hc/cancel.gif" border="0"></a>
+    </div>
+
+  </div>
+</div>
+
+
+<script>
+    //leftbar save and close
+    function saveAndClose(temp) {
+        if (temp == 1) {
+            var pos = Position.cumulativeOffset($("sub"));
+            $("save_close").style.display = "block";
+            $("save_close").style.left = (pos[0] + 200) + "px";
+            $("save_close").style.top = (pos[1] - 10) + "px";
+        } else {
+            $("save_close").style.display = "none";
+        }
+    }
+    if ($("flash") != null) {
+        window.setInterval(function() {
+            $("flash").style.display = "none"
+        }, 10000)
+    }
+
+</script>

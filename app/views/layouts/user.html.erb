@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<link href="/stylesheets/hc.css" type="text/css" rel="stylesheet">
+<script src="/javascripts/hc/hc.js" type="text/javascript" ></script>
+<script src="/javascripts/prototype.js" type="text/javascript" ></script>
+
+<head>
+  <meta content="text/html; charset=UTF-8">
+  <title>
+    Concordia University - Online Application
+  </title>
+</head>
+
+<%= render :partial => '/layouts/header' %>
+
+<%if !(@left=="false")%>
+	<div class="main">
+    <%= render :partial => '/layouts/leftbar' %>
+	<% if flash[:notice] -%>
+		 <span style="color:red;" ><font color=red size=2><%= flash[:notice] %></font></span> 
+	<% end -%>
+	<%= @content_for_layout %>	
+	</div>
+ <% else%>
+ 	<%= @content_for_layout %>	
+<%end%>
+ 
+<!-- footer -->
+<%= render :partial => '/layouts/footer' %>
+</html>

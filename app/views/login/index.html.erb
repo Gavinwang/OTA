@@ -1,0 +1,37 @@
+<body>
+<div class="main">
+  <div align="center"><span style="color:red;" ><%= flash[:message] %></span> </div>
+  <div align="center"><span style="color:red;" ><%= flash[:notice] %></span> </div>
+  <form name="loginForm" action="/login/login" method="post">
+    <div style="overflow:auto;width:366px; margin:0 auto;">
+      <div class="content_div"> 
+        <div class="content_title" style="text-align:center">Applicant Login</div>
+        <div class="content_cont_white">
+          <div class="userInfo">
+            <ul>
+              <li><span class=label style="font-size:12px; font-weight:bold">Email Address</span>
+                <input name="login_name" type="text" size="25" maxlength="100" value="<%= @loginName %>">
+              </li>
+              <li><span class=label style="font-size:12px; font-weight:bold">Password</span>
+                <input name="password" type="password" size="25" maxlength="20" value="<%= @password %>">
+              </li>
+            </ul>
+          </div>
+          <a href="#" style="margin-left:160px;height:50px" onclick="submitLogin();"><img src="/images/hc/login.gif" border="0"/></a><br/><br/>
+          <a href="/forgetpwd/forgetpwd" style="margin-left:160px;">I forgot my password</a><br/><br/>
+          <span class="font_bold" style="padding-left:50px">New Applicants:</span> Click <a href="/profile">here</a> to
+          create a profile.<br/><br/>
+          <span style="padding-left:50px"><a href="/instructorempl">Application for Online Instructor Employment</a><br/></span>
+          <br/>
+        </div>
+      </div>
+    </div>
+    <br/>
+
+    <div class="content_cont_white">
+      <span style="font-size:12px; font-weight:bold;display:block;text-align:center;">Problems logging in? Contact 1-877-251-4405 or
+        <a href="mailto:admissions@concordiaonline.net" class="help">admissions@concordiaonline.net</a></span>
+    </div>
+  </form>
+</div>
+</body>
