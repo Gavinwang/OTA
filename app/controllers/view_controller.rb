@@ -15,4 +15,7 @@ class ViewController < ApplicationController
     end
   end
 
+  def  index
+  
+  end 
 end
